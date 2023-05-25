@@ -3,7 +3,7 @@ import { CustomerDto } from '../dto';
 import { SaveCustomerService } from '../services';
 import { SavedUserOutput } from '../types';
 
-@Controller('customers')
+@Controller()
 export class SaveCustomerController {
   constructor(private saveCustomerService: SaveCustomerService) {}
 
