@@ -1,11 +1,18 @@
 version: '3.8'
 services:
-  cache:
+  redis:
     image: redis:7.0.11
     ports:
       - 6379:6379
     volumes:
-      - cache_volume:/data
+      - redis_volume:/var/lib/redis
+  redis-commander:
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - '8081:8081'
 volumes:
-  cache_volume:
-    driver: local
+  redis_volume:
