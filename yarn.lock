@@ -377,6 +377,11 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.41.0.tgz#080321c3b68253522f7646b55b577dd99d2950b3"
   integrity sha512-LxcyMGxwmTh2lY9FwHPGWOHmYFCZvbrFCBZL4FzSSsxsRPuhrYUg/49/0KDfW8tnIEaEHtfmn6+NPN+1DqaNmA==
 
+"@faker-js/faker@^8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-8.0.1.tgz#2157068931aaab555eda5ff87f50330aeeb6153a"
+  integrity sha512-kbh5MenpTN9U0B4QcOI1NoTPlZHniSYQ3BHbhAnPjJGAmmFqxoxTE4sGdpy7ZOO9038DPGCuhXyMkjOr05uVwA==
+
 "@fastify/ajv-compiler@^3.5.0":
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/@fastify/ajv-compiler/-/ajv-compiler-3.5.0.tgz#459bff00fefbf86c96ec30e62e933d2379e46670"
