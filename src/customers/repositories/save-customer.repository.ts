@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CacheRepository } from 'src/cache/repositories';
+import { CacheRepository } from '../../cache/repositories';
 import { Customer } from '../models/customer';
 
 @Injectable()
