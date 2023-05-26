@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common';
-import { SaveCustomerController } from './controllers';
-import { SaveCustomerRepository } from './repositories';
-import { SaveCustomerService } from './services';
+import { GetCustomerController, SaveCustomerController } from './controllers';
+import { GetCustomerRepository, SaveCustomerRepository } from './repositories';
+import { GetCustomerService, SaveCustomerService } from './services';
 
 @Module({
-  controllers: [SaveCustomerController],
-  providers: [SaveCustomerRepository, SaveCustomerService],
+  controllers: [GetCustomerController, SaveCustomerController],
+  providers: [
+    GetCustomerRepository,
+    GetCustomerService,
+    SaveCustomerRepository,
+    SaveCustomerService,
+  ],
 })
 export class CustomerModule {}

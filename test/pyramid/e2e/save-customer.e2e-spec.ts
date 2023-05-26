@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { UnavailableCacheError } from '../../../src/cache/exceptions';
+import { UnavailableCacheException } from '../../../src/cache/exceptions';
 import { CacheRepository } from '../../../src/cache/repositories';
 import { AppModule } from '../../../src/app.module';
 import { configure } from '../../../src/configure';
@@ -46,7 +46,7 @@ describe('SaveCustomer', () => {
 
   it('should return BAD_GATEWAY(502) when cache is unavailable', async () => {
     jest.spyOn(cacheRepository, 'set').mockImplementation(() => {
-      throw new UnavailableCacheError();
+      throw new UnavailableCacheException();
     });
     const payload = makeCustomerDto();
     const { body, statusCode } = await request(app.getHttpServer())

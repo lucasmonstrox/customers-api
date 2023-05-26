@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Customer } from '../models/customer';
+import { Customer } from '../models/customer.model';
 import { SaveCustomerRepository } from '../repositories';
 import { Input, SavedUserOutput } from '../types';
 

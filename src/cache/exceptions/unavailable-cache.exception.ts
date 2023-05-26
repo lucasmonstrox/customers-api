@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 
-export class UnavailableCacheError extends Error {
+export class UnavailableCacheException extends Error {
   name = 'UnavailableCache';
   statusCode = HttpStatus.BAD_GATEWAY;
 

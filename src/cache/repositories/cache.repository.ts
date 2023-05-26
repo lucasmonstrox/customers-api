@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { UnavailableCacheError } from '../exceptions';
+import { UnavailableCacheException } from '../exceptions';
 import { Cache } from '../types';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class CacheRepository {
       const parsedData = JSON.parse(data);
       return parsedData;
     } catch (e) {
-      throw new UnavailableCacheError();
+      throw new UnavailableCacheException();
     }
   }
 
@@ -28,7 +28,7 @@ export class CacheRepository {
     try {
       await this.cache.set(key, JSON.stringify(data));
     } catch (e) {
-      throw new UnavailableCacheError();
+      throw new UnavailableCacheException();
     }
   }
 }

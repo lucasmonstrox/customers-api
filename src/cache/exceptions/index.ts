@@ -1,1 +1,1 @@
-export * from './unavailable-cache.error';
+export * from './unavailable-cache.exception';
