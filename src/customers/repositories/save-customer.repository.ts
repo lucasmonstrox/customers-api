@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CacheRepository } from '../../cache/repositories';
-import { Customer } from '../models/customer.model';
+import { Customer } from '../models';
 
 @Injectable()
 export class SaveCustomerRepository {

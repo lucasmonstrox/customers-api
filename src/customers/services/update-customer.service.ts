@@ -5,12 +5,15 @@ import { SaveCustomerRepository } from '../repositories';
 import { SavedUserOutput } from '../types';
 
 @Injectable()
-export class SaveCustomerService {
+export class UpdateCustomerService {
   constructor(private saveCustomerRepository: SaveCustomerRepository) {}
 
-  async execute({ name, document }: CustomerDto): SavedUserOutput {
-    const customer = new Customer(name, document);
-    await this.saveCustomerRepository.execute(customer);
-    return customer;
+  async execute(customer: Customer, customerDto: CustomerDto): SavedUserOutput {
+    const updatedCustomer = Object.assign<Customer, CustomerDto>(
+      customer,
+      customerDto,
+    );
+    await this.saveCustomerRepository.execute(updatedCustomer);
+    return updatedCustomer;
   }
 }

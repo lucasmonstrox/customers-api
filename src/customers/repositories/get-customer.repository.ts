@@ -10,7 +10,18 @@ export class GetCustomerRepository {
   async execute(customerId: string): Promise<Customer | null> {
     try {
       // TODO: assert properties when isnt null
-      const customer = await this.cacheRepository.get(`customer:${customerId}`);
+      const customerInCache = await this.cacheRepository.get(
+        `customer:${customerId}`,
+      );
+      const customerInCacheNotFound = !customerInCache;
+      if (customerInCacheNotFound) {
+        return null;
+      }
+      const customer = new Customer(
+        customerInCache.name,
+        customerInCache.document,
+        customerInCache.id,
+      );
       return customer;
     } catch (error) {
       throw new UnavailableCacheException();
