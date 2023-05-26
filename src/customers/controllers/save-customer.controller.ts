@@ -17,7 +17,7 @@ export class SaveCustomerController {
   @Version('1')
   @HttpCode(HttpStatus.CREATED)
   @Post()
-  execute(@Body() customerDto: CustomerDto): SavedUserOutput {
+  async execute(@Body() customerDto: CustomerDto): SavedUserOutput {
     return this.saveCustomerService.execute(customerDto);
   }
 }
