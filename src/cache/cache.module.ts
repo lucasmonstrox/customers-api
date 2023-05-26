@@ -1,6 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 import { cacheFactory } from './factories';
-import { CacheRepository } from './repositories/cache.repository';
+import { CacheRepository } from './repositories';
 
 @Global()
 @Module({
