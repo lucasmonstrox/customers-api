@@ -23,6 +23,18 @@ describe('SaveCustomer', () => {
     cacheRepository = moduleRef.get<CacheRepository>(CacheRepository);
   });
 
+  it('should return BAD_GATEWAY(502) when cache is unavailable', async () => {
+    jest.spyOn(cacheRepository, 'set').mockImplementationOnce(() => {
+      throw new UnavailableCacheException();
+    });
+    const payload = makeCustomerDto();
+    const { body, statusCode } = await request(app.getHttpServer())
+      .post('/customers')
+      .send(payload);
+    expect(statusCode).toBe(HttpStatus.BAD_GATEWAY);
+    expect(body.message).toBe(UnavailableCacheException.message);
+  });
+
   it('should return BAD_REQUEST(400) when name/document are empty', async () => {
     const payload = makeCustomerDto({ name: '', document: '' });
     const { body } = await request(app.getHttpServer())
@@ -42,20 +54,6 @@ describe('SaveCustomer', () => {
       },
     };
     expect(body).toStrictEqual(result);
-  });
-
-  it('should return BAD_GATEWAY(502) when cache is unavailable', async () => {
-    jest.spyOn(cacheRepository, 'set').mockImplementation(() => {
-      throw new UnavailableCacheException();
-    });
-    const payload = makeCustomerDto();
-    const { body, statusCode } = await request(app.getHttpServer())
-      .post('/customers')
-      .send(payload);
-    expect(statusCode).toBe(HttpStatus.BAD_GATEWAY);
-    expect(body.message).toBe(
-      'Looks like cache is anavailable, please try again later',
-    );
   });
 
   it('should return CREATED(201) when name/document are filled correctly', async () => {

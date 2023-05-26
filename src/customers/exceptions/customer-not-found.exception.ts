@@ -6,6 +6,10 @@ export class CustomerNotFoundException extends Error {
 
   constructor(customerId: string) {
     super();
-    this.message = `Customer with id "${customerId}" not found`;
+    this.message = CustomerNotFoundException.makeMessage(customerId);
+  }
+
+  static makeMessage(customerId: string): string {
+    return `Customer with id "${customerId}" not found`;
   }
 }

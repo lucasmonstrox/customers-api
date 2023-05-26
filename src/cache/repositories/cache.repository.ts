@@ -9,12 +9,13 @@ export class CacheRepository {
     private cache: Cache,
   ) {}
 
+  // TODO: add return type
   async get(key: string) {
     try {
       const data = await this.cache.get(key);
-      const dataNotFound = !!data;
+      const dataNotFound = !data;
       if (dataNotFound) {
-        return JSON.parse(data);
+        return null;
       }
       const parsedData = JSON.parse(data);
       return parsedData;

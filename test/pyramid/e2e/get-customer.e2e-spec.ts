@@ -4,6 +4,7 @@ import * as request from 'supertest';
 import { AppModule } from '../../../src/app.module';
 import { configure } from '../../../src/configure';
 import { UnavailableCacheException } from '../../../src/cache/exceptions';
+import { CustomerNotFoundException } from '../../../src/customers/exceptions';
 import { GetCustomerRepository } from '../../../src/customers/repositories';
 import { makeCustomer } from '../../mocks/customers/models/customer.model';
 
@@ -25,20 +26,6 @@ describe('GetCustomer', () => {
     );
   });
 
-  it('should return BAD_GATEWAY(502) when customer not found', async () => {
-    const mockedCustomer = makeCustomer();
-    jest.spyOn(getCustomerRepository, 'execute').mockImplementation(() => {
-      throw new UnavailableCacheException();
-    });
-    const { body, statusCode } = await request(app.getHttpServer()).get(
-      `/customers/${mockedCustomer.id}`,
-    );
-    expect(statusCode).toBe(HttpStatus.BAD_GATEWAY);
-    expect(body.message).toBe(
-      'Looks like cache is anavailable, please try again later',
-    );
-  });
-
   it('should return NOT_FOUND(404) when customer not found', async () => {
     const mockedCustomer = makeCustomer();
     jest.spyOn(getCustomerRepository, 'execute').mockResolvedValueOnce(null);
@@ -47,8 +34,20 @@ describe('GetCustomer', () => {
     );
     expect(statusCode).toBe(HttpStatus.NOT_FOUND);
     expect(body.message).toBe(
-      `Customer with id "${mockedCustomer.id}" not found`,
+      CustomerNotFoundException.makeMessage(mockedCustomer.id),
     );
+  });
+
+  it('should return BAD_GATEWAY(502) when cache is unavailable', async () => {
+    const mockedCustomer = makeCustomer();
+    jest.spyOn(getCustomerRepository, 'execute').mockImplementationOnce(() => {
+      throw new UnavailableCacheException();
+    });
+    const { body, statusCode } = await request(app.getHttpServer()).get(
+      `/customers/${mockedCustomer.id}`,
+    );
+    expect(statusCode).toBe(HttpStatus.BAD_GATEWAY);
+    expect(body.message).toBe(UnavailableCacheException.message);
   });
 
   it('should return OK(200) when fetching correct customer', async () => {
