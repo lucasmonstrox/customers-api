@@ -25,11 +25,12 @@ describe('SaveCustomerController', () => {
 
   it('should return customer', async () => {
     const mockedCustomer = makeCustomer();
-    jest
+    const saveCustomerServiceSpy = jest
       .spyOn(saveCustomerService, 'execute')
       .mockResolvedValueOnce(mockedCustomer);
     const mockedCustomerDto = makeCustomerDto();
     const result = await saveCustomerController.execute(mockedCustomerDto);
     expect(mockedCustomer).toStrictEqual(result);
+    expect(saveCustomerServiceSpy).toHaveBeenCalledWith(mockedCustomerDto);
   });
 });
