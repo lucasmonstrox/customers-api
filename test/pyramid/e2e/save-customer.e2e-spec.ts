@@ -5,7 +5,7 @@ import { UnavailableCacheException } from '../../../src/cache/exceptions';
 import { CacheRepository } from '../../../src/cache/repositories';
 import { AppModule } from '../../../src/app.module';
 import { configure } from '../../../src/configure';
-import { makeCustomerDto } from '../../mocks/customers/dto/customer.dto';
+import { makeCustomerDto } from '../../mocks/customers/dto';
 
 // TODO: test unauthenticated requests
 // TODO: test unavailable sso

@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { SaveCustomerRepository } from '../../../../../src/customers/repositories';
 import { SaveCustomerService } from '../../../../../src/customers/services';
-import { makeCustomerDto } from '../../../../mocks/customers/dto/customer.dto';
+import { makeCustomerDto } from '../../../../mocks/customers/dto';
 
 describe('SaveCustomerService', () => {
   let saveCustomerRepository: SaveCustomerRepository;

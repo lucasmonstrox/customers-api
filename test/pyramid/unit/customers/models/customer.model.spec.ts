@@ -1,4 +1,4 @@
-import { makeCustomer } from '../../../../mocks/customers/models/customer.model';
+import { makeCustomer } from '../../../../mocks/customers/models';
 
 describe('Customer', () => {
   it('should get correctly cache key', async () => {

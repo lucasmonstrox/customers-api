@@ -6,8 +6,8 @@ import { CacheRepository } from '../../../src/cache/repositories';
 import { CustomerNotFoundException } from '../../../src/customers/exceptions';
 import { AppModule } from '../../../src/app.module';
 import { configure } from '../../../src/configure';
-import { makeCustomerDto } from '../../mocks/customers/dto/customer.dto';
-import { makeCustomer } from '../../mocks/customers/models/customer.model';
+import { makeCustomerDto } from '../../mocks/customers/dto';
+import { makeCustomer } from '../../mocks/customers/models';
 
 // TODO: test unauthenticated requests
 // TODO: test unavailable sso

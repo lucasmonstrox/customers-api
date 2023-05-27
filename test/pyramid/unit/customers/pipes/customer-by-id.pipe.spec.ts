@@ -3,7 +3,7 @@ import { Test } from '@nestjs/testing';
 import { CustomerNotFoundException } from '../../../../../src/customers/exceptions';
 import { CustomerByIdPipe } from '../../../../../src/customers/pipes';
 import { GetCustomerRepository } from '../../../../../src/customers/repositories';
-import { makeCustomer } from '../../../../mocks/customers/models/customer.model';
+import { makeCustomer } from '../../../../mocks/customers/models';
 
 describe('CustomerByIdPipe', () => {
   let customerByIdPipe: CustomerByIdPipe;

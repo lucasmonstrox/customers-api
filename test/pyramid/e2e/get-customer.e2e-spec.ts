@@ -6,7 +6,7 @@ import { configure } from '../../../src/configure';
 import { UnavailableCacheException } from '../../../src/cache/exceptions';
 import { CustomerNotFoundException } from '../../../src/customers/exceptions';
 import { GetCustomerRepository } from '../../../src/customers/repositories';
-import { makeCustomer } from '../../mocks/customers/models/customer.model';
+import { makeCustomer } from '../../mocks/customers/models';
 
 // TODO: test unauthenticated requests
 // TODO: test unavailable sso

@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { GetCustomerController } from '../../../../../src/customers/controllers';
 import { GetCustomerRepository } from '../../../../../src/customers/repositories';
-import { makeCustomer } from '../../../../mocks/customers/models/customer.model';
+import { makeCustomer } from '../../../../mocks/customers/models';
 
 describe('GetCustomerController', () => {
   let getCustomerController: GetCustomerController;

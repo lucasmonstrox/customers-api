@@ -3,8 +3,8 @@ import { CustomerDto } from '../../../../../src/customers/dto';
 import { Customer } from '../../../../../src/customers/models';
 import { SaveCustomerRepository } from '../../../../../src/customers/repositories';
 import { UpdateCustomerService } from '../../../../../src/customers/services';
-import { makeCustomerDto } from '../../../../mocks/customers/dto/customer.dto';
-import { makeCustomer } from '../../../../mocks/customers/models/customer.model';
+import { makeCustomerDto } from '../../../../mocks/customers/dto';
+import { makeCustomer } from '../../../../mocks/customers/models';
 
 describe('UpdateCustomerService', () => {
   let saveCustomerRepository: SaveCustomerRepository;
