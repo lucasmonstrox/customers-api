@@ -14,9 +14,11 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { ErrorResponse } from '@/core/swagger/schema/responses';
 import { CustomerDto } from '../dto';
 import { Customer } from '../models';
 import { SaveCustomerService } from '../services';
+import { CreateCustomerErrors } from '../swagger/schemas';
 
 @ApiTags('customer')
 @Controller()
@@ -29,13 +31,16 @@ export class SaveCustomerController {
     description: 'Returns the Customer with his data',
   })
   @ApiBadRequestResponse({
+    type: CreateCustomerErrors,
     description: 'Occurs when body is invalid or has validation errors',
   })
   @ApiUnauthorizedResponse({
+    type: ErrorResponse,
     description: 'Occurs when the User is not authenticated',
   })
   @ApiBadGatewayResponse({
-    description: 'Occurs when a Cache/SSO is unavailable',
+    type: ErrorResponse,
+    description: 'Occurs when Cache/SSO is unavailable',
   })
   @Version('1')
   @HttpCode(HttpStatus.CREATED)

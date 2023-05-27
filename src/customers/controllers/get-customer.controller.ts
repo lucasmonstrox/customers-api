@@ -7,6 +7,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { ErrorResponse } from '@/core/swagger/schema/responses';
 import { Customer } from '../models';
 import { GetCustomerService } from '../services';
 
@@ -21,11 +22,16 @@ export class GetCustomerController {
     description: 'Returns the Customer with his data',
   })
   @ApiUnauthorizedResponse({
+    type: ErrorResponse,
     description: 'Occurs when the User is not authenticated',
   })
-  @ApiNotFoundResponse({ description: 'Occurs when a Client is not found' })
+  @ApiNotFoundResponse({
+    type: ErrorResponse,
+    description: 'Occurs when a Customer is not found',
+  })
   @ApiBadGatewayResponse({
-    description: 'Occurs when a Cache/SSO is unavailable',
+    type: ErrorResponse,
+    description: 'Occurs when Cache/SSO is unavailable',
   })
   @Version('1')
   @Get(':id')
