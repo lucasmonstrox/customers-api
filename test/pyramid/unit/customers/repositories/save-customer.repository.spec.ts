@@ -20,7 +20,7 @@ describe('SaveCustomerRepository', () => {
     );
   });
 
-  fit('should save Customer', async () => {
+  it('should save Customer', async () => {
     const mockedCustomer = makeCustomer();
     const cacheRepositorySpy = jest
       .spyOn(cacheRepository, 'set')
