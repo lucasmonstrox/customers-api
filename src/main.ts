@@ -1,4 +1,5 @@
 import { VersioningType } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
@@ -12,8 +13,9 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   );
+  const configService = app.get(ConfigService);
   configure(app);
   app.enableVersioning({ type: VersioningType.URI });
-  await app.listen(3000);
+  await app.listen(configService.get('APP_PORT'));
 }
 bootstrap();
