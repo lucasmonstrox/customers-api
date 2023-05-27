@@ -89,3 +89,4 @@ yarn start:prod
 [ ] Add docker
 [ ] Add husky
 [ ] Add path alias
+[ ] TODO add stress tests
