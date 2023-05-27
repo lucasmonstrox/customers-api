@@ -85,7 +85,6 @@ yarn start:prod
 # ✅ TODO
 
 [ ] Add application logs
-[ ] Improve code by folder feature
 [ ] Add docker
 [ ] Add stress tests
 [ ] Add husky pre-push
