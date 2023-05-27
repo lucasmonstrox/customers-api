@@ -5,7 +5,11 @@ import {
   UpdateCustomerController,
 } from './controllers';
 import { GetCustomerRepository, SaveCustomerRepository } from './repositories';
-import { SaveCustomerService, UpdateCustomerService } from './services';
+import {
+  GetCustomerService,
+  SaveCustomerService,
+  UpdateCustomerService,
+} from './services';
 
 @Module({
   controllers: [
@@ -15,6 +19,7 @@ import { SaveCustomerService, UpdateCustomerService } from './services';
   ],
   providers: [
     GetCustomerRepository,
+    GetCustomerService,
     SaveCustomerRepository,
     SaveCustomerService,
     UpdateCustomerService,

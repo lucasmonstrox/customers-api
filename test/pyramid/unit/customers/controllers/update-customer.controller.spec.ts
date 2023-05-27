@@ -34,13 +34,17 @@ describe('UpdateCustomerController', () => {
       mockedCustomer,
       mockedCustomerDto,
     );
-    jest
+    const updateCustomerServiceSpy = jest
       .spyOn(updateCustomerService, 'execute')
       .mockResolvedValueOnce(mockedUpdatedCustomer);
     const result = await updateCustomerController.execute(
-      mockedCustomer,
+      mockedCustomer.id,
       mockedCustomerDto,
     );
     expect(mockedUpdatedCustomer).toStrictEqual(result);
+    expect(updateCustomerServiceSpy).toHaveBeenCalledWith(
+      mockedCustomer.id,
+      mockedCustomerDto,
+    );
   });
 });

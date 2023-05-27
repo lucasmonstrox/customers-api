@@ -1,28 +1,59 @@
 import { Test } from '@nestjs/testing';
 import { CustomerDto } from '../../../../../src/customers/dto';
+import { CustomerNotFoundException } from '../../../../../src/customers/exceptions';
 import { Customer } from '../../../../../src/customers/models';
-import { SaveCustomerRepository } from '../../../../../src/customers/repositories';
+import {
+  GetCustomerRepository,
+  SaveCustomerRepository,
+} from '../../../../../src/customers/repositories';
 import { UpdateCustomerService } from '../../../../../src/customers/services';
 import { makeCustomerDto } from '../../../../mocks/customers/dto';
 import { makeCustomer } from '../../../../mocks/customers/models';
 
 describe('UpdateCustomerService', () => {
+  let getCustomerRepository: GetCustomerRepository;
   let saveCustomerRepository: SaveCustomerRepository;
   let updateCustomerService: UpdateCustomerService;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [SaveCustomerRepository, UpdateCustomerService],
+      providers: [
+        GetCustomerRepository,
+        SaveCustomerRepository,
+        UpdateCustomerService,
+      ],
     })
+      .overrideProvider(GetCustomerRepository)
+      .useValue({ execute: jest.fn() })
       .overrideProvider(SaveCustomerRepository)
       .useValue({ execute: jest.fn() })
       .compile();
+    getCustomerRepository = moduleRef.get<GetCustomerRepository>(
+      GetCustomerRepository,
+    );
     saveCustomerRepository = moduleRef.get<SaveCustomerRepository>(
       SaveCustomerRepository,
     );
     updateCustomerService = moduleRef.get<UpdateCustomerService>(
       UpdateCustomerService,
     );
+  });
+
+  it('should throw CustomerNotFoundException when Customer not found', async () => {
+    const mockedCustomer = makeCustomer();
+    const mockedCustomerDto = makeCustomerDto();
+    const getCustomerRepositorySpy = jest
+      .spyOn(getCustomerRepository, 'execute')
+      .mockResolvedValueOnce(null);
+    const saveCustomerRepositorySpy = jest.spyOn(
+      saveCustomerRepository,
+      'execute',
+    );
+    await expect(
+      updateCustomerService.execute(mockedCustomer.id, mockedCustomerDto),
+    ).rejects.toThrow(CustomerNotFoundException);
+    expect(getCustomerRepositorySpy).toHaveBeenCalledWith(mockedCustomer.id);
+    expect(saveCustomerRepositorySpy).not.toHaveBeenCalled();
   });
 
   it('should save new Customer', async () => {
@@ -32,14 +63,18 @@ describe('UpdateCustomerService', () => {
       mockedCustomer,
       mockedCustomerDto,
     );
+    const getCustomerRepositorySpy = jest
+      .spyOn(getCustomerRepository, 'execute')
+      .mockResolvedValueOnce(mockedCustomer);
     const saveCustomerRepositorySpy = jest
       .spyOn(saveCustomerRepository, 'execute')
       .mockResolvedValueOnce(undefined);
     const result = await updateCustomerService.execute(
-      mockedCustomer,
+      mockedCustomer.id,
       mockedCustomerDto,
     );
     expect(result).toStrictEqual(updatedCustomer);
+    expect(getCustomerRepositorySpy).toHaveBeenCalledWith(mockedCustomer.id);
     expect(saveCustomerRepositorySpy).toHaveBeenCalledWith(updatedCustomer);
   });
 });

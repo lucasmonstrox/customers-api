@@ -1,14 +1,20 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { v4 as uuidv4 } from 'uuid';
 
 export class Customer {
+  @ApiProperty()
   id: string;
-  document: string;
+
+  @ApiProperty()
   name: string;
+
+  @ApiProperty()
+  document: string;
 
   constructor(name: string, document: string, id: string = uuidv4()) {
     this.id = id;
-    this.document = document;
     this.name = name;
+    this.document = document;
   }
 
   getCacheKey(): string {

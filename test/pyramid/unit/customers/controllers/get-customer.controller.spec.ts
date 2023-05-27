@@ -1,27 +1,33 @@
 import { Test } from '@nestjs/testing';
 import { GetCustomerController } from '../../../../../src/customers/controllers';
-import { GetCustomerRepository } from '../../../../../src/customers/repositories';
+import { GetCustomerService } from '../../../../../src/customers/services';
 import { makeCustomer } from '../../../../mocks/customers/models';
 
 describe('GetCustomerController', () => {
   let getCustomerController: GetCustomerController;
+  let getCustomerService: GetCustomerService;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [GetCustomerController],
-      providers: [GetCustomerRepository],
+      providers: [GetCustomerService],
     })
-      .overrideProvider(GetCustomerRepository)
+      .overrideProvider(GetCustomerService)
       .useValue({ execute: jest.fn() })
       .compile();
     getCustomerController = moduleRef.get<GetCustomerController>(
       GetCustomerController,
     );
+    getCustomerService = moduleRef.get<GetCustomerService>(GetCustomerService);
   });
 
   it('should return customer', async () => {
     const mockedCustomer = makeCustomer();
-    const result = getCustomerController.execute(mockedCustomer);
-    expect(mockedCustomer).toBe(result);
+    const getCustomerServiceSpy = jest
+      .spyOn(getCustomerService, 'execute')
+      .mockResolvedValueOnce(mockedCustomer);
+    const result = await getCustomerController.execute(mockedCustomer.id);
+    expect(result).toStrictEqual(mockedCustomer);
+    expect(getCustomerServiceSpy).toHaveBeenCalledWith(mockedCustomer.id);
   });
 });

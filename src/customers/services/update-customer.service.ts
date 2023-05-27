@@ -1,14 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { CustomerDto } from '../dto';
 import { Customer } from '../models';
-import { SaveCustomerRepository } from '../repositories';
-import { SavedUserOutput } from '../types';
+import { GetCustomerRepository, SaveCustomerRepository } from '../repositories';
+import { CustomerNotFoundException } from '../exceptions';
 
 @Injectable()
 export class UpdateCustomerService {
-  constructor(private saveCustomerRepository: SaveCustomerRepository) {}
+  constructor(
+    private getCustomerRepository: GetCustomerRepository,
+    private saveCustomerRepository: SaveCustomerRepository,
+  ) {}
 
-  async execute(customer: Customer, customerDto: CustomerDto): SavedUserOutput {
+  async execute(
+    customerId: string,
+    customerDto: CustomerDto,
+  ): Promise<Customer> {
+    const customer = await this.getCustomerRepository.execute(customerId);
+    const customerNotFound = !customer;
+    if (customerNotFound) {
+      throw new CustomerNotFoundException(customerId);
+    }
     const updatedCustomer = Object.assign<Customer, CustomerDto>(
       customer,
       customerDto,
