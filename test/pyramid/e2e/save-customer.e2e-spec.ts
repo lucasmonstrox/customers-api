@@ -23,6 +23,10 @@ describe('SaveCustomer', () => {
     cacheRepository = moduleRef.get<CacheRepository>(CacheRepository);
   });
 
+  afterAll(async () => {
+    await app.close();
+  });
+
   it('should return BAD_GATEWAY(502) when cache is unavailable', async () => {
     jest.spyOn(cacheRepository, 'set').mockImplementationOnce(() => {
       throw new UnavailableCacheException();

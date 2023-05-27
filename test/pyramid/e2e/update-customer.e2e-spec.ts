@@ -25,6 +25,10 @@ describe('UpdateCustomer', () => {
     cacheRepository = moduleRef.get<CacheRepository>(CacheRepository);
   });
 
+  afterAll(async () => {
+    await app.close();
+  });
+
   it('should return BAD_REQUEST(400) when name/document are empty', async () => {
     const mockedCustomer = makeCustomer();
     const payload = makeCustomerDto({ name: '', document: '' });

@@ -26,6 +26,10 @@ describe('GetCustomer', () => {
     );
   });
 
+  afterAll(async () => {
+    await app.close();
+  });
+
   it('should return NOT_FOUND(404) when customer not found', async () => {
     const mockedCustomer = makeCustomer();
     jest.spyOn(getCustomerRepository, 'execute').mockResolvedValueOnce(null);
