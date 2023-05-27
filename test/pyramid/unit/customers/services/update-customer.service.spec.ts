@@ -27,17 +27,17 @@ describe('UpdateCustomerService', () => {
 
   it('should save new Customer', async () => {
     const mockedCustomer = makeCustomer();
-    const customerDto = makeCustomerDto();
+    const mockedCustomerDto = makeCustomerDto();
     const updatedCustomer = Object.assign<Customer, CustomerDto>(
       mockedCustomer,
-      customerDto,
+      mockedCustomerDto,
     );
     const saveCustomerRepositorySpy = jest
       .spyOn(saveCustomerRepository, 'execute')
       .mockResolvedValueOnce(undefined);
     const result = await updateCustomerService.execute(
       mockedCustomer,
-      customerDto,
+      mockedCustomerDto,
     );
     expect(result).toStrictEqual(updatedCustomer);
     expect(saveCustomerRepositorySpy).toHaveBeenCalledWith(updatedCustomer);

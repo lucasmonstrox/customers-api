@@ -22,11 +22,11 @@ describe('SaveCustomerService', () => {
   });
 
   it('should save new Customer', async () => {
-    const customerDto = makeCustomerDto();
+    const mockedCustomerDto = makeCustomerDto();
     const saveCustomerRepositorySpy = jest
       .spyOn(saveCustomerRepository, 'execute')
       .mockResolvedValueOnce(undefined);
-    await saveCustomerService.execute(customerDto);
+    await saveCustomerService.execute(mockedCustomerDto);
     expect(saveCustomerRepositorySpy).toHaveBeenCalled();
   });
 });
