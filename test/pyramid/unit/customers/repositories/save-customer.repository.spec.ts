@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
-import { CacheRepository } from '../../../../../src/cache/repositories';
-import { SaveCustomerRepository } from '../../../../../src/customers/repositories';
-import { makeCustomer } from '../../../../mocks/customers/models';
+import { CacheRepository } from '@/cache/repositories';
+import { SaveCustomerRepository } from '@/customers/repositories';
+import { makeCustomer } from '@/test/mocks/customers/models';
 
 describe('SaveCustomerRepository', () => {
   let cacheRepository: CacheRepository;

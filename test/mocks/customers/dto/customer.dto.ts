@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { CustomerDto } from '../../../../src/customers/dto';
+import { CustomerDto } from '@/customers/dto';
 
 export const makeCustomerDto = (data?: Partial<CustomerDto>): CustomerDto => ({
   name: faker.person.fullName(),

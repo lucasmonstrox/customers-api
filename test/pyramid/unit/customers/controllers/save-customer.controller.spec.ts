@@ -1,8 +1,8 @@
 import { Test } from '@nestjs/testing';
-import { SaveCustomerController } from '../../../../../src/customers/controllers';
-import { SaveCustomerService } from '../../../../../src/customers/services';
-import { makeCustomerDto } from '../../../../mocks/customers/dto';
-import { makeCustomer } from '../../../../mocks/customers/models';
+import { SaveCustomerController } from '@/customers/controllers';
+import { SaveCustomerService } from '@/customers/services';
+import { makeCustomerDto } from '@/test/mocks/customers/dto';
+import { makeCustomer } from '@/test/mocks/customers/models';
 
 describe('SaveCustomerController', () => {
   let saveCustomerController: SaveCustomerController;

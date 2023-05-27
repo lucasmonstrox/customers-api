@@ -1,5 +1,5 @@
-import { CustomerNotFoundException } from '../../../../../src/customers/exceptions';
-import { makeCustomer } from '../../../../mocks/customers/models';
+import { CustomerNotFoundException } from '@/customers/exceptions';
+import { makeCustomer } from '@/test/mocks/customers/models';
 
 describe('CustomerNotFoundException', () => {
   it('should return correct exception message', async () => {

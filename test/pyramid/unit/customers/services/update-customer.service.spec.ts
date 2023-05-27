@@ -1,14 +1,14 @@
 import { Test } from '@nestjs/testing';
-import { CustomerDto } from '../../../../../src/customers/dto';
-import { CustomerNotFoundException } from '../../../../../src/customers/exceptions';
-import { Customer } from '../../../../../src/customers/models';
+import { CustomerDto } from '@/customers/dto';
+import { CustomerNotFoundException } from '@/customers/exceptions';
+import { Customer } from '@/customers/models';
 import {
   GetCustomerRepository,
   SaveCustomerRepository,
-} from '../../../../../src/customers/repositories';
-import { UpdateCustomerService } from '../../../../../src/customers/services';
-import { makeCustomerDto } from '../../../../mocks/customers/dto';
-import { makeCustomer } from '../../../../mocks/customers/models';
+} from '@/customers/repositories';
+import { UpdateCustomerService } from '@/customers/services';
+import { makeCustomerDto } from '@/test/mocks/customers/dto';
+import { makeCustomer } from '@/test/mocks/customers/models';
 
 describe('UpdateCustomerService', () => {
   let getCustomerRepository: GetCustomerRepository;

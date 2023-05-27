@@ -1,9 +1,9 @@
 import { Test } from '@nestjs/testing';
-import { UpdateCustomerController } from '../../../../../src/customers/controllers';
-import { GetCustomerRepository } from '../../../../../src/customers/repositories';
-import { UpdateCustomerService } from '../../../../../src/customers/services';
-import { makeCustomerDto } from '../../../../mocks/customers/dto';
-import { makeCustomer } from '../../../../mocks/customers/models';
+import { UpdateCustomerController } from '@/customers/controllers';
+import { GetCustomerRepository } from '@/customers/repositories';
+import { UpdateCustomerService } from '@/customers/services';
+import { makeCustomerDto } from '@/test/mocks/customers/dto';
+import { makeCustomer } from '@/test/mocks/customers/models';
 
 describe('UpdateCustomerController', () => {
   let updateCustomerController: UpdateCustomerController;

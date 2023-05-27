@@ -1,12 +1,12 @@
 import { Test } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../../../src/app.module';
-import { configure } from '../../../src/configure';
-import { UnavailableCacheException } from '../../../src/cache/exceptions';
-import { CustomerNotFoundException } from '../../../src/customers/exceptions';
-import { GetCustomerRepository } from '../../../src/customers/repositories';
-import { makeCustomer } from '../../mocks/customers/models';
+import { AppModule } from '@/app.module';
+import { configure } from '@/configure';
+import { UnavailableCacheException } from '@/cache/exceptions';
+import { CustomerNotFoundException } from '@/customers/exceptions';
+import { GetCustomerRepository } from '@/customers/repositories';
+import { makeCustomer } from '@/test/mocks/customers/models';
 
 // TODO: test unauthenticated requests
 // TODO: test unavailable sso

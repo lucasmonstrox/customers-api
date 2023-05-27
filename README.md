@@ -87,6 +87,5 @@ yarn start:prod
 [ ] Add application logs
 [ ] Improve code by folder feature
 [ ] Add docker
-[ ] Add path alias
 [ ] Add stress tests
 [ ] Add husky pre-push

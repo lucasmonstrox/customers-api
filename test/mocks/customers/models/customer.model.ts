@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Customer } from '../../../../src/customers/models';
+import { Customer } from '@/customers/models';
 
 export const makeCustomer = (data?: Partial<Customer>): Customer => {
   const customerData = {

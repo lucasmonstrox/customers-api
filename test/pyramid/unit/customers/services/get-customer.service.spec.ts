@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
 import { Test } from '@nestjs/testing';
-import { CustomerNotFoundException } from '../../../../../src/customers/exceptions';
-import { GetCustomerRepository } from '../../../../../src/customers/repositories';
-import { GetCustomerService } from '../../../../../src/customers/services';
-import { makeCustomer } from '../../../../mocks/customers/models';
+import { CustomerNotFoundException } from '@/customers/exceptions';
+import { GetCustomerRepository } from '@/customers/repositories';
+import { GetCustomerService } from '@/customers/services';
+import { makeCustomer } from '@/test/mocks/customers/models';
 
 describe('GetCustomerService', () => {
   let getCustomerService: GetCustomerService;

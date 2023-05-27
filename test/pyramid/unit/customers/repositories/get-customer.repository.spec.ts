@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
 import { Test } from '@nestjs/testing';
-import { UnavailableCacheException } from '../../../../../src/cache/exceptions';
-import { CacheRepository } from '../../../../../src/cache/repositories';
-import { GetCustomerRepository } from '../../../../../src/customers/repositories';
-import { makeCustomer } from '../../../../mocks/customers/models';
+import { UnavailableCacheException } from '@/cache/exceptions';
+import { CacheRepository } from '@/cache/repositories';
+import { GetCustomerRepository } from '@/customers/repositories';
+import { makeCustomer } from '@/test/mocks/customers/models';
 
 describe('GetCustomerRepository', () => {
   let cacheRepository: CacheRepository;
