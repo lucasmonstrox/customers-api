@@ -7,9 +7,7 @@ services:
     volumes:
       - redis_volume:/var/lib/redis
   redis-commander:
-    hostname: redis-commander
     image: rediscommander/redis-commander:latest
-    restart: always
     environment:
       - REDIS_HOSTS=local:redis:${REDIS_PORT}
     ports:
