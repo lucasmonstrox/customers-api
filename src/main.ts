@@ -18,9 +18,10 @@ async function bootstrap() {
   configure(app);
   app.enableVersioning({ type: VersioningType.URI });
   const config = new DocumentBuilder()
-    .setTitle('Customer API')
-    .setDescription('Customer API endpoints')
+    .setTitle('Customers API')
+    .setDescription('Customers API endpoints')
     .setVersion('1.0')
+    .addBearerAuth()
     .addTag('customers')
     .build();
   const document = SwaggerModule.createDocument(app, config);
