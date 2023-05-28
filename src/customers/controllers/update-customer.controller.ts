@@ -8,13 +8,15 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { Roles } from 'nest-keycloak-connect';
-import { ErrorResponse } from '@/core/swagger/schema/responses';
+import {
+  BadRequestResponse,
+  ErrorResponse,
+} from '@/core/swagger/schemas/responses';
 import { CustomerDto } from '../dto';
 import { Customer } from '../models';
 import { UpdateCustomerService } from '../services';
-import { CustomerErrors } from '../swagger/schemas';
 
-@ApiTags('customer')
+@ApiTags('customers')
 @Controller()
 export class UpdateCustomerController {
   constructor(private updateCustomerService: UpdateCustomerService) {}
@@ -29,7 +31,7 @@ export class UpdateCustomerController {
     description: 'Occurs when the User is not authenticated',
   })
   @ApiBadRequestResponse({
-    type: CustomerErrors,
+    type: BadRequestResponse,
     description: 'Occurs when body is invalid or has validation errors',
   })
   @ApiBadGatewayResponse({

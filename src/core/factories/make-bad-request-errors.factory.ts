@@ -11,5 +11,5 @@ export const makeBadRequestErrors = (
       errors[property] = constraints;
     }
   });
-  return errors;
+  return { errors };
 };

@@ -21,7 +21,7 @@ async function bootstrap() {
     .setTitle('Customer API')
     .setDescription('Customer API endpoints')
     .setVersion('1.0')
-    .addTag('customer')
+    .addTag('customers')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);

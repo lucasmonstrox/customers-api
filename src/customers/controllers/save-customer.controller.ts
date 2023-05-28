@@ -15,13 +15,15 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { Roles } from 'nest-keycloak-connect';
-import { ErrorResponse } from '@/core/swagger/schema/responses';
+import {
+  BadRequestResponse,
+  ErrorResponse,
+} from '@/core/swagger/schemas/responses';
 import { CustomerDto } from '../dto';
 import { Customer } from '../models';
 import { SaveCustomerService } from '../services';
-import { CustomerErrors } from '../swagger/schemas';
 
-@ApiTags('customer')
+@ApiTags('customers')
 @Controller()
 export class SaveCustomerController {
   constructor(private saveCustomerService: SaveCustomerService) {}
@@ -32,7 +34,7 @@ export class SaveCustomerController {
     description: 'Returns the Customer with his data',
   })
   @ApiBadRequestResponse({
-    type: CustomerErrors,
+    type: BadRequestResponse,
     description: 'Occurs when body is invalid or has validation errors',
   })
   @ApiUnauthorizedResponse({

@@ -8,11 +8,11 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { Roles } from 'nest-keycloak-connect';
-import { ErrorResponse } from '@/core/swagger/schema/responses';
+import { ErrorResponse } from '@/core/swagger/schemas/responses';
 import { Customer } from '../models';
 import { GetCustomerService } from '../services';
 
-@ApiTags('customer')
+@ApiTags('customers')
 @Controller()
 export class GetCustomerController {
   constructor(private getCustomerService: GetCustomerService) {}
