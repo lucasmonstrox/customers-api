@@ -7,11 +7,3 @@ export class ErrorResponse {
   @ApiProperty()
   errorMessage: string;
 }
-
-export class ErrorResponse2 {
-  @ApiProperty()
-  errorCode: string;
-
-  @ApiProperty()
-  errorMessage: string;
-}
