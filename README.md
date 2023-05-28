@@ -84,7 +84,12 @@ yarn start:prod
 
 # ✅ TODO
 
-[ ] Add application logs
+[ ] Validate env variables
 [ ] Add docker
+[ ] Standardize error messages
+[ ] Improve folders by features
+[ ] Lock nodejs version
+[ ] Add pt-BR README
+[ ] Add application logs
 [ ] Add stress tests
 [ ] Add husky pre-push
