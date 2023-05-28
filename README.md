@@ -86,7 +86,6 @@ yarn start:prod
 
 [ ] Add docker
 [ ] Standardize error messages
-[ ] Improve folders by features
 [ ] Lock nodejs version
 [ ] Add pt-BR README
 [ ] Add application logs
