@@ -91,3 +91,4 @@ yarn start:prod
 [ ] Add application logs
 [ ] Add stress tests
 [ ] Add husky pre-push
+[ ] Disable swagger on production
