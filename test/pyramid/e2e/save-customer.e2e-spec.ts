@@ -3,6 +3,7 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { UnavailableCacheException } from '@/cache/exceptions';
 import { CacheRepository } from '@/cache/repositories';
+import { BadRequestErrors } from '@/core/types';
 import { AppModule } from '@/app.module';
 import { configure } from '@/configure';
 import { makeCustomerDto } from '@/test/mocks/customers/dto';
@@ -44,20 +45,17 @@ describe('SaveCustomer', () => {
     const { body } = await request(app.getHttpServer())
       .post('/customers')
       .send(payload);
-    // TODO: add types
-    const result = {
-      name: {
-        errors: {
+    const badRequestErrors: BadRequestErrors = {
+      errors: {
+        name: {
           isNotEmpty: 'name should not be empty',
         },
-      },
-      document: {
-        errors: {
+        document: {
           isNotEmpty: 'document should not be empty',
         },
       },
     };
-    expect(body).toStrictEqual(result);
+    expect(body).toStrictEqual(badRequestErrors);
   });
 
   it('should return CREATED(201) when name/document are filled correctly', async () => {

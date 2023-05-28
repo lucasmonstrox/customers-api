@@ -3,6 +3,7 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { UnavailableCacheException } from '@/cache/exceptions';
 import { CacheRepository } from '@/cache/repositories';
+import { BadRequestErrors } from '@/core/types';
 import { CustomerNotFoundException } from '@/customers/exceptions';
 import { AppModule } from '@/app.module';
 import { configure } from '@/configure';
@@ -35,20 +36,17 @@ describe('UpdateCustomer', () => {
     const { body } = await request(app.getHttpServer())
       .put(`/customers/${mockedCustomer.id}`)
       .send(payload);
-    // TODO: add types
-    const result = {
-      name: {
-        errors: {
+    const badRequestErrors: BadRequestErrors = {
+      errors: {
+        name: {
           isNotEmpty: 'name should not be empty',
         },
-      },
-      document: {
-        errors: {
+        document: {
           isNotEmpty: 'document should not be empty',
         },
       },
     };
-    expect(body).toStrictEqual(result);
+    expect(body).toStrictEqual(badRequestErrors);
   });
 
   it('should return NOT_FOUND(404) when customer not found', async () => {
