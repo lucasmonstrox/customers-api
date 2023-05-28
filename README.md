@@ -84,7 +84,6 @@ yarn start:prod
 
 # ✅ TODO
 
-[ ] Validate env variables
 [ ] Add docker
 [ ] Standardize error messages
 [ ] Improve folders by features
