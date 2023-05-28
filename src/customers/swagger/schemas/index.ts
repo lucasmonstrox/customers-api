@@ -1,1 +1,1 @@
-export * from './create-customer-errors.schema';
+export * from './customer-errors.schema';

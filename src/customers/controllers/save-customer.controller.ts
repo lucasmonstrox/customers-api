@@ -19,7 +19,7 @@ import { ErrorResponse } from '@/core/swagger/schema/responses';
 import { CustomerDto } from '../dto';
 import { Customer } from '../models';
 import { SaveCustomerService } from '../services';
-import { CreateCustomerErrors } from '../swagger/schemas';
+import { CustomerErrors } from '../swagger/schemas';
 
 @ApiTags('customer')
 @Controller()
@@ -32,7 +32,7 @@ export class SaveCustomerController {
     description: 'Returns the Customer with his data',
   })
   @ApiBadRequestResponse({
-    type: CreateCustomerErrors,
+    type: CustomerErrors,
     description: 'Occurs when body is invalid or has validation errors',
   })
   @ApiUnauthorizedResponse({

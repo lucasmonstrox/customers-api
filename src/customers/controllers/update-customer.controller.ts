@@ -12,7 +12,7 @@ import { ErrorResponse } from '@/core/swagger/schema/responses';
 import { CustomerDto } from '../dto';
 import { Customer } from '../models';
 import { UpdateCustomerService } from '../services';
-import { CreateCustomerErrors } from '../swagger/schemas';
+import { CustomerErrors } from '../swagger/schemas';
 
 @ApiTags('customer')
 @Controller()
@@ -29,7 +29,7 @@ export class UpdateCustomerController {
     description: 'Occurs when the User is not authenticated',
   })
   @ApiBadRequestResponse({
-    type: CreateCustomerErrors,
+    type: CustomerErrors,
     description: 'Occurs when body is invalid or has validation errors',
   })
   @ApiBadGatewayResponse({
