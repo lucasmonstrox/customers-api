@@ -21,10 +21,8 @@ export class Customer {
     return `customer:${this.id}`;
   }
 
-  // TODO: add types
-  toCache() {
+  toCache(): Pick<Customer, 'name' | 'document'> {
     return {
-      id: this.id,
       document: this.document,
       name: this.name,
     };

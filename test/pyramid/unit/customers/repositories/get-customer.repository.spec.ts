@@ -41,9 +41,10 @@ describe('GetCustomerRepository', () => {
 
   it('should return Customer when Customer is found in cache', async () => {
     const mockedCustomer = makeCustomer();
-    jest
-      .spyOn(cacheRepository, 'get')
-      .mockResolvedValueOnce(mockedCustomer.toCache());
+    jest.spyOn(cacheRepository, 'get').mockResolvedValueOnce({
+      id: mockedCustomer.id,
+      ...mockedCustomer.toCache(),
+    });
     const result = await getCustomerRepository.execute(mockedCustomer.id);
     expect(result).toStrictEqual(mockedCustomer);
   });
