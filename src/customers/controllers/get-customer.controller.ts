@@ -7,6 +7,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { Roles } from 'nest-keycloak-connect';
 import { ErrorResponse } from '@/core/swagger/schema/responses';
 import { Customer } from '../models';
 import { GetCustomerService } from '../services';
@@ -34,6 +35,7 @@ export class GetCustomerController {
     description: 'Occurs when Cache/SSO is unavailable',
   })
   @Version('1')
+  @Roles({ roles: ['user'] })
   @Get(':id')
   async execute(
     @Param('id') customerId: string,
