@@ -19,6 +19,12 @@ import {
   BadRequestResponse,
   ErrorResponse,
 } from '@/core/swagger/schemas/responses';
+import {
+  BAD_GATEWAY,
+  BAD_REQUEST,
+  GET_CUSTOMER,
+  NOT_AUTHENTICATED,
+} from '../consts/swagger';
 import { CustomerDto } from '../dto';
 import { Customer } from '../models';
 import { SaveCustomerService } from '../services';
@@ -31,19 +37,19 @@ export class SaveCustomerController {
   @ApiOperation({ summary: 'Create new Customer' })
   @ApiCreatedResponse({
     type: Customer,
-    description: 'Returns the Customer with his data',
+    description: GET_CUSTOMER,
   })
   @ApiBadRequestResponse({
     type: BadRequestResponse,
-    description: 'Occurs when body is invalid or has validation errors',
+    description: BAD_REQUEST,
   })
   @ApiUnauthorizedResponse({
     type: ErrorResponse,
-    description: 'Occurs when the User is not authenticated',
+    description: NOT_AUTHENTICATED,
   })
   @ApiBadGatewayResponse({
     type: ErrorResponse,
-    description: 'Occurs when Cache/SSO is unavailable',
+    description: BAD_GATEWAY,
   })
   @Version('1')
   @HttpCode(HttpStatus.CREATED)

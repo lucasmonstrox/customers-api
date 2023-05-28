@@ -9,6 +9,12 @@ import {
 } from '@nestjs/swagger';
 import { Roles } from 'nest-keycloak-connect';
 import { ErrorResponse } from '@/core/swagger/schemas/responses';
+import {
+  BAD_GATEWAY,
+  CUSTOMER_NOT_FOUND,
+  GET_CUSTOMER,
+  NOT_AUTHENTICATED,
+} from '../consts/swagger';
 import { Customer } from '../models';
 import { GetCustomerService } from '../services';
 
@@ -20,19 +26,19 @@ export class GetCustomerController {
   @ApiOperation({ summary: 'Get Customer data' })
   @ApiOkResponse({
     type: Customer,
-    description: 'Returns the Customer with his data',
+    description: GET_CUSTOMER,
   })
   @ApiUnauthorizedResponse({
     type: ErrorResponse,
-    description: 'Occurs when the User is not authenticated',
+    description: NOT_AUTHENTICATED,
   })
   @ApiNotFoundResponse({
     type: ErrorResponse,
-    description: 'Occurs when a Customer is not found',
+    description: CUSTOMER_NOT_FOUND,
   })
   @ApiBadGatewayResponse({
     type: ErrorResponse,
-    description: 'Occurs when Cache/SSO is unavailable',
+    description: BAD_GATEWAY,
   })
   @Version('1')
   @Roles({ roles: ['user'] })

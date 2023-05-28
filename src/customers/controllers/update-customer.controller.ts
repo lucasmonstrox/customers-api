@@ -3,6 +3,7 @@ import {
   ApiBadGatewayResponse,
   ApiBadRequestResponse,
   ApiCreatedResponse,
+  ApiNotFoundResponse,
   ApiOperation,
   ApiTags,
   ApiUnauthorizedResponse,
@@ -12,6 +13,13 @@ import {
   BadRequestResponse,
   ErrorResponse,
 } from '@/core/swagger/schemas/responses';
+import {
+  BAD_GATEWAY,
+  BAD_REQUEST,
+  CUSTOMER_NOT_FOUND,
+  GET_CUSTOMER,
+  NOT_AUTHENTICATED,
+} from '../consts/swagger';
 import { CustomerDto } from '../dto';
 import { Customer } from '../models';
 import { UpdateCustomerService } from '../services';
@@ -24,19 +32,23 @@ export class UpdateCustomerController {
   @ApiOperation({ summary: 'Update Customer data' })
   @ApiCreatedResponse({
     type: Customer,
-    description: 'Returns the Customer with his data',
+    description: GET_CUSTOMER,
   })
   @ApiUnauthorizedResponse({
     type: ErrorResponse,
-    description: 'Occurs when the User is not authenticated',
+    description: NOT_AUTHENTICATED,
   })
   @ApiBadRequestResponse({
     type: BadRequestResponse,
-    description: 'Occurs when body is invalid or has validation errors',
+    description: BAD_REQUEST,
+  })
+  @ApiNotFoundResponse({
+    type: ErrorResponse,
+    description: CUSTOMER_NOT_FOUND,
   })
   @ApiBadGatewayResponse({
     type: ErrorResponse,
-    description: 'Occurs when Cache/SSO is unavailable',
+    description: BAD_GATEWAY,
   })
   @Version('1')
   @Roles({ roles: ['user'] })
