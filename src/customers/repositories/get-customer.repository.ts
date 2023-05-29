@@ -20,7 +20,7 @@ export class GetCustomerRepository {
       const customer = new Customer(
         customerInCache.name,
         customerInCache.document,
-        customerInCache.id,
+        customerId,
       );
       return customer;
     } catch (error) {
