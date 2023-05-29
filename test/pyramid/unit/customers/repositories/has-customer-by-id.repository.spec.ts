@@ -3,6 +3,7 @@ import { UnavailableCacheException } from '@/core/exceptions';
 import { CacheRepository } from '@/core/repositories';
 import { HasCustomerByIdRepository } from '@/customers/repositories';
 import { makeCustomer } from '@/test/mocks/customers/models';
+import { Customer } from '@/customers/models';
 
 describe('HasCustomerByIdRepository', () => {
   let cacheRepository: CacheRepository;
@@ -31,7 +32,7 @@ describe('HasCustomerByIdRepository', () => {
     await expect(hasCustomerByIdRepository.execute(id)).rejects.toThrow(
       UnavailableCacheException,
     );
-    expect(cacheRepositorySpy).toHaveBeenCalledWith(id);
+    expect(cacheRepositorySpy).toHaveBeenCalledWith(Customer.getCacheKey(id));
   });
 
   it('should return false when key does not exists', async () => {
@@ -41,7 +42,7 @@ describe('HasCustomerByIdRepository', () => {
       .mockResolvedValueOnce(false);
     const result = await hasCustomerByIdRepository.execute(id);
     expect(result).toBe(false);
-    expect(cacheRepositorySpy).toHaveBeenCalledWith(id);
+    expect(cacheRepositorySpy).toHaveBeenCalledWith(Customer.getCacheKey(id));
   });
 
   it('should return true when key exists', async () => {
@@ -51,6 +52,6 @@ describe('HasCustomerByIdRepository', () => {
       .mockResolvedValueOnce(true);
     const result = await hasCustomerByIdRepository.execute(id);
     expect(result).toBe(true);
-    expect(cacheRepositorySpy).toHaveBeenCalledWith(id);
+    expect(cacheRepositorySpy).toHaveBeenCalledWith(Customer.getCacheKey(id));
   });
 });

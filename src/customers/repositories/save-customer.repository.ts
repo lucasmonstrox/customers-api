@@ -7,7 +7,7 @@ export class SaveCustomerRepository {
   constructor(private cacheRepository: CacheRepository) {}
 
   async execute(customer: Customer) {
-    const customerCacheKey = customer.getCacheKey();
+    const customerCacheKey = Customer.getCacheKey(customer.id);
     const customerToCache = customer.toCache();
     await this.cacheRepository.set(customerCacheKey, customerToCache);
   }

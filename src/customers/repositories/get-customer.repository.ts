@@ -11,7 +11,7 @@ export class GetCustomerRepository {
     try {
       // TODO: assert properties when isnt null
       const customerInCache = await this.cacheRepository.get<Customer>(
-        `customer:${customerId}`,
+        Customer.getCacheKey(customerId),
       );
       const customerInCacheNotFound = !customerInCache;
       if (customerInCacheNotFound) {

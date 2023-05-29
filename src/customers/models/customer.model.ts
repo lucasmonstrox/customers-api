@@ -17,8 +17,8 @@ export class Customer {
     this.document = document;
   }
 
-  getCacheKey(): string {
-    return `customer:${this.id}`;
+  static getCacheKey(id: string): string {
+    return `customers:${id}`;
   }
 
   toCache(): Pick<Customer, 'name' | 'document'> {

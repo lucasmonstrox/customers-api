@@ -1,10 +1,11 @@
+import { Customer } from '@/customers/models';
 import { makeCustomer } from '@/test/mocks/customers/models';
 
 describe('Customer', () => {
   it('should get correctly cache key', async () => {
     const mockedCustomer = makeCustomer();
-    const cacheKey = `customer:${mockedCustomer.id}`;
-    expect(mockedCustomer.getCacheKey()).toBe(cacheKey);
+    const mockedCustomerCacheKey = Customer.getCacheKey(mockedCustomer.id);
+    expect(mockedCustomerCacheKey).toBe(`customers:${mockedCustomer.id}`);
   });
 
   it('should get correctly fields to be cached', async () => {

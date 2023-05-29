@@ -1,5 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { CacheRepository } from '@/core/repositories';
+import { Customer } from '@/customers/models';
 import { SaveCustomerRepository } from '@/customers/repositories';
 import { makeCustomer } from '@/test/mocks/customers/models';
 
@@ -25,7 +26,7 @@ describe('SaveCustomerRepository', () => {
     const cacheRepositorySpy = jest.spyOn(cacheRepository, 'set');
     await saveCustomerRepository.execute(mockedCustomer);
     expect(cacheRepositorySpy).toHaveBeenCalledWith(
-      mockedCustomer.getCacheKey(),
+      Customer.getCacheKey(mockedCustomer.id),
       mockedCustomer.toCache(),
     );
   });

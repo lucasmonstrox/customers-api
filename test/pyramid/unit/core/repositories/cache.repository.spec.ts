@@ -3,6 +3,7 @@ import { Test } from '@nestjs/testing';
 import { Redis } from 'ioredis';
 import { UnavailableCacheException } from '@/core/exceptions';
 import { CacheRepository } from '@/core/repositories';
+import { Customer } from '@/customers/models';
 import { makeCustomer } from '@/test/mocks/customers/models';
 
 describe('CacheRepository', () => {
@@ -92,7 +93,7 @@ describe('CacheRepository', () => {
   describe('set', () => {
     it('should throw UnavailableCacheException when an error occurs while getting data from cache', async () => {
       const mockedCustomer = makeCustomer();
-      const cacheKey = mockedCustomer.getCacheKey();
+      const cacheKey = Customer.getCacheKey(mockedCustomer.id);
       const data = mockedCustomer.toCache();
       const cacheSpy = jest.spyOn(redis, 'set').mockImplementationOnce(() => {
         throw new Error();
@@ -105,7 +106,7 @@ describe('CacheRepository', () => {
 
     it('should call redis.set with correctly params', async () => {
       const mockedCustomer = makeCustomer();
-      const cacheKey = mockedCustomer.getCacheKey();
+      const cacheKey = Customer.getCacheKey(mockedCustomer.id);
       const data = mockedCustomer.toCache();
       const cacheSpy = jest.spyOn(redis, 'set');
       await cacheRepository.set(cacheKey, data);
