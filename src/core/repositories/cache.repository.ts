@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { UnavailableCacheException } from '../exceptions';
 import { Redis } from 'ioredis';
+import { UnavailableCacheException } from '../exceptions';
 
 @Injectable()
 export class CacheRepository {
