@@ -1,27 +1,27 @@
 import { Module } from '@nestjs/common';
 import {
+  CreateCustomerController,
   GetCustomerController,
-  SaveCustomerController,
   UpdateCustomerController,
 } from './controllers';
 import { GetCustomerRepository, SaveCustomerRepository } from './repositories';
 import {
+  CreateCustomerService,
   GetCustomerService,
-  SaveCustomerService,
   UpdateCustomerService,
 } from './services';
 
 @Module({
   controllers: [
+    CreateCustomerController,
     GetCustomerController,
-    SaveCustomerController,
     UpdateCustomerController,
   ],
   providers: [
+    CreateCustomerService,
     GetCustomerRepository,
     GetCustomerService,
     SaveCustomerRepository,
-    SaveCustomerService,
     UpdateCustomerService,
   ],
 })

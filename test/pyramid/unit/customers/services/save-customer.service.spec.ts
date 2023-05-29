@@ -1,15 +1,15 @@
 import { Test } from '@nestjs/testing';
 import { SaveCustomerRepository } from '@/customers/repositories';
-import { SaveCustomerService } from '@/customers/services';
+import { CreateCustomerService } from '@/customers/services';
 import { makeCustomerDto } from '@/test/mocks/customers/dto';
 
-describe('SaveCustomerService', () => {
+describe('CreateCustomerService', () => {
+  let createCustomerService: CreateCustomerService;
   let saveCustomerRepository: SaveCustomerRepository;
-  let saveCustomerService: SaveCustomerService;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [SaveCustomerRepository, SaveCustomerService],
+      providers: [SaveCustomerRepository, CreateCustomerService],
     })
       .overrideProvider(SaveCustomerRepository)
       .useValue({ execute: jest.fn() })
@@ -17,8 +17,9 @@ describe('SaveCustomerService', () => {
     saveCustomerRepository = moduleRef.get<SaveCustomerRepository>(
       SaveCustomerRepository,
     );
-    saveCustomerService =
-      moduleRef.get<SaveCustomerService>(SaveCustomerService);
+    createCustomerService = moduleRef.get<CreateCustomerService>(
+      CreateCustomerService,
+    );
   });
 
   it('should save new Customer', async () => {
@@ -26,7 +27,7 @@ describe('SaveCustomerService', () => {
     const saveCustomerRepositorySpy = jest
       .spyOn(saveCustomerRepository, 'execute')
       .mockResolvedValueOnce(undefined);
-    await saveCustomerService.execute(mockedCustomerDto);
+    await createCustomerService.execute(mockedCustomerDto);
     expect(saveCustomerRepositorySpy).toHaveBeenCalled();
   });
 });

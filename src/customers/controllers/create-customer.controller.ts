@@ -27,12 +27,12 @@ import {
 } from '../consts/swagger';
 import { CustomerDto } from '../dto';
 import { Customer } from '../models';
-import { SaveCustomerService } from '../services';
+import { CreateCustomerService } from '../services';
 
 @ApiTags('customers')
 @Controller()
-export class SaveCustomerController {
-  constructor(private saveCustomerService: SaveCustomerService) {}
+export class CreateCustomerController {
+  constructor(private CreateCustomerService: CreateCustomerService) {}
 
   @ApiOperation({ summary: 'Create new Customer' })
   @ApiCreatedResponse({
@@ -57,7 +57,7 @@ export class SaveCustomerController {
   @Post()
   async execute(
     @Body() customerDto: CustomerDto,
-  ): ReturnType<SaveCustomerService['execute']> {
-    return this.saveCustomerService.execute(customerDto);
+  ): ReturnType<CreateCustomerService['execute']> {
+    return this.CreateCustomerService.execute(customerDto);
   }
 }

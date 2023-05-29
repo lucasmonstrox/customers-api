@@ -4,7 +4,7 @@ import { Customer } from '../models';
 import { SaveCustomerRepository } from '../repositories';
 
 @Injectable()
-export class SaveCustomerService {
+export class CreateCustomerService {
   constructor(private saveCustomerRepository: SaveCustomerRepository) {}
 
   async execute({ name, document }: CustomerDto): Promise<Customer> {
