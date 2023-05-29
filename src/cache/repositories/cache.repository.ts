@@ -9,8 +9,7 @@ export class CacheRepository {
     private cache: Cache,
   ) {}
 
-  // TODO: add return type
-  async get(key: string) {
+  async get<T>(key: string): Promise<T> {
     try {
       const data = await this.cache.get(key);
       const dataNotFound = !data;
@@ -24,7 +23,6 @@ export class CacheRepository {
     }
   }
 
-  // TODO: add JSON type
   async set(key: string, data: any) {
     try {
       await this.cache.set(key, JSON.stringify(data));
