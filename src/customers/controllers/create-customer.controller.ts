@@ -18,7 +18,7 @@ import { Roles } from 'nest-keycloak-connect';
 import {
   BadRequestResponse,
   ErrorResponse,
-} from '@/core/swagger/schemas/responses';
+} from '@/core/schemas/swagger/responses';
 import {
   BAD_GATEWAY,
   BAD_REQUEST,
