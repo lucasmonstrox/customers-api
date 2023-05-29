@@ -22,9 +22,7 @@ describe('SaveCustomerRepository', () => {
 
   it('should save Customer', async () => {
     const mockedCustomer = makeCustomer();
-    const cacheRepositorySpy = jest
-      .spyOn(cacheRepository, 'set')
-      .mockResolvedValueOnce(undefined);
+    const cacheRepositorySpy = jest.spyOn(cacheRepository, 'set');
     await saveCustomerRepository.execute(mockedCustomer);
     expect(cacheRepositorySpy).toHaveBeenCalledWith(
       mockedCustomer.getCacheKey(),

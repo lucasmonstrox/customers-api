@@ -100,9 +100,10 @@ describe('UpdateCustomerService', () => {
     const getCustomerRepositorySpy = jest
       .spyOn(getCustomerRepository, 'execute')
       .mockResolvedValueOnce(mockedCustomer);
-    const saveCustomerRepositorySpy = jest
-      .spyOn(saveCustomerRepository, 'execute')
-      .mockResolvedValueOnce(undefined);
+    const saveCustomerRepositorySpy = jest.spyOn(
+      saveCustomerRepository,
+      'execute',
+    );
     const result = await updateCustomerService.execute(
       mockedCustomer.id,
       mockedCustomerDto,
