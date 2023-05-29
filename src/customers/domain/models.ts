@@ -3,5 +3,5 @@ export interface Customer {
   name: string;
   document: string;
 
-  toCache(): any;
+  toCache(): Pick<Customer, 'name' | 'document'>;
 }
