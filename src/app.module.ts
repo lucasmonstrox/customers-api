@@ -8,7 +8,7 @@ import {
   KeycloakConnectOptions,
   RoleGuard,
 } from 'nest-keycloak-connect';
-import { CacheModule } from './cache/cache.module';
+import { CoreModule } from './core/core.module';
 import { CustomerModule } from './customers/customer.module';
 
 @Module({
@@ -30,7 +30,7 @@ import { CustomerModule } from './customers/customer.module';
         REDIS_PORT: joi.string().required(),
       }),
     }),
-    CacheModule,
+    CoreModule,
     KeycloakConnectModule.registerAsync({
       useFactory: (configService: ConfigService): KeycloakConnectOptions => {
         const keycloakConnectOptions: KeycloakConnectOptions = {

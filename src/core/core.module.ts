@@ -1,5 +1,5 @@
 import { Global, Module } from '@nestjs/common';
-import { cacheFactory } from './factories';
+import { cacheFactory } from './providers';
 import { CacheRepository } from './repositories';
 
 @Global()
@@ -7,4 +7,4 @@ import { CacheRepository } from './repositories';
   providers: [cacheFactory, CacheRepository],
   exports: [CacheRepository],
 })
-export class CacheModule {}
+export class CoreModule {}

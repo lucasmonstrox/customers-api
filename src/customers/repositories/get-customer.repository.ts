@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { UnavailableCacheException } from '@/cache/exceptions';
-import { CacheRepository } from '@/cache/repositories';
+import { UnavailableCacheException } from '@/core/exceptions';
+import { CacheRepository } from '@/core/repositories';
 import { Customer } from '../models';
 
 @Injectable()
