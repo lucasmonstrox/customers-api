@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { v4 as uuidv4 } from 'uuid';
+import { Customer as ICustomer } from '../domain';
 
-export class Customer {
+export class Customer implements ICustomer {
   @ApiProperty()
   id: string;
 

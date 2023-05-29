@@ -1,4 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import {
+  DeleteCustomerRepository as IDeleteCustomerRepository,
+  GetCustomerRepository as IGetCustomerRepository,
+  HasCustomerByIdRepository as IHasCustomerByIdRepository,
+  SaveCustomerRepository as ISaveCustomerRepository,
+} from '../domain';
 import { CustomerDto } from '../dto';
 import {
   CustomerIdAlreadyExists,
@@ -15,10 +21,14 @@ import {
 @Injectable()
 export class UpdateCustomerService {
   constructor(
-    private deleteCustomerRepository: DeleteCustomerRepository,
-    private getCustomerRepository: GetCustomerRepository,
-    private hasCustomerByIdRepository: HasCustomerByIdRepository,
-    private saveCustomerRepository: SaveCustomerRepository,
+    @Inject(DeleteCustomerRepository)
+    private deleteCustomerRepository: IDeleteCustomerRepository,
+    @Inject(GetCustomerRepository)
+    private getCustomerRepository: IGetCustomerRepository,
+    @Inject(HasCustomerByIdRepository)
+    private hasCustomerByIdRepository: IHasCustomerByIdRepository,
+    @Inject(SaveCustomerRepository)
+    private saveCustomerRepository: ISaveCustomerRepository,
   ) {}
 
   async execute(
@@ -42,7 +52,7 @@ export class UpdateCustomerService {
     const updatedCustomer = Object.assign<Customer, CustomerDto>(
       customer,
       customerDto,
-    );
+    ) as Customer;
     await this.saveCustomerRepository.execute(updatedCustomer);
     if (updatingCustomerIdIsDifferentFromCustomerId) {
       await this.deleteCustomerRepository.execute(customerId);
