@@ -23,7 +23,7 @@ Whenever a new environment variable is added, it must be also added to the `.exa
 ## Setting up Docker
 
 - This is will make a new Redis running in the standard port `6379`.
-- This is will make a new redis-commandaer running in port `8081`.
+- This is will make a new redis-commander running in port `8081`.
 
 ```bash
 docker-compose up -d
