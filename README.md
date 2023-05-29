@@ -20,15 +20,14 @@ Ask other developers to share `.env`. For security reasons this file is not vers
 
 Whenever a new environment variable is added, it must be also added to the `.example.env` file to keep everything up to date.
 
-## Setting up Redis
+## Setting up Docker
 
 - This is will make a new Redis running in the standard port `6379`.
+- This is will make a new redis-commandaer running in port `8081`.
 
 ```bash
 docker-compose up -d
 ```
-
-After executing `docker-compose up` access http://localhost:8081 to access `redis-commandaer` UI.
 
 # ⌨ Development
 
@@ -39,11 +38,13 @@ After executing `docker-compose up` access http://localhost:8081 to access `redi
 yarn start:dev
 ```
 
+Observation: You must change `$APP_PORT` for the port to be used in your environment.
+
 ## 🎮 Playground
 
 `http://localhost:$APP_PORT/swagger` to access swagger playground.
 
-Observartion: You must change `$APP_PORT` for the port to be used in your environment.
+Observation: You must change `$APP_PORT` for the port to be used in your environment.
 
 ## 🧪 Running tests
 
