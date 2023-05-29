@@ -3,6 +3,7 @@ import {
   Controller,
   HttpCode,
   HttpStatus,
+  Inject,
   Post,
   Version,
 } from '@nestjs/common';
@@ -25,6 +26,7 @@ import {
   GET_CUSTOMER,
   NOT_AUTHENTICATED,
 } from '../consts/swagger';
+import { CreateCustomerService as ICreateCustomerService } from '../domain';
 import { CreateCustomerDto } from '../dto';
 import { Customer } from '../models';
 import { CreateCustomerService } from '../services';
@@ -32,7 +34,10 @@ import { CreateCustomerService } from '../services';
 @ApiTags('customers')
 @Controller()
 export class CreateCustomerController {
-  constructor(private createCustomerService: CreateCustomerService) {}
+  constructor(
+    @Inject(CreateCustomerService)
+    private createCustomerService: ICreateCustomerService,
+  ) {}
 
   @ApiOperation({ summary: 'Create new Customer' })
   @ApiCreatedResponse({
@@ -57,7 +62,7 @@ export class CreateCustomerController {
   @Post()
   async execute(
     @Body() createCustomerDto: CreateCustomerDto,
-  ): ReturnType<CreateCustomerService['execute']> {
+  ): ReturnType<ICreateCustomerService['execute']> {
     return this.createCustomerService.execute(createCustomerDto);
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Version } from '@nestjs/common';
+import { Controller, Get, Inject, Param, Version } from '@nestjs/common';
 import {
   ApiBadGatewayResponse,
   ApiNotFoundResponse,
@@ -15,13 +15,17 @@ import {
   GET_CUSTOMER,
   NOT_AUTHENTICATED,
 } from '../consts/swagger';
+import { GetCustomerService as IGetCustomerService } from '../domain';
 import { Customer } from '../models';
 import { GetCustomerService } from '../services';
 
 @ApiTags('customers')
 @Controller()
 export class GetCustomerController {
-  constructor(private getCustomerService: GetCustomerService) {}
+  constructor(
+    @Inject(GetCustomerService)
+    private getCustomerService: IGetCustomerService,
+  ) {}
 
   @ApiOperation({ summary: 'Get Customer data' })
   @ApiOkResponse({
@@ -45,7 +49,7 @@ export class GetCustomerController {
   @Get(':id')
   async execute(
     @Param('id') customerId: string,
-  ): ReturnType<GetCustomerService['execute']> {
+  ): ReturnType<IGetCustomerService['execute']> {
     return this.getCustomerService.execute(customerId);
   }
 }

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Inject,
   Param,
   ParseUUIDPipe,
   Put,
@@ -29,6 +30,7 @@ import {
   GET_CUSTOMER,
   NOT_AUTHENTICATED,
 } from '../consts/swagger';
+import { UpdateCustomerService as IUpdateCustomerService } from '../domain';
 import { CustomerDto } from '../dto';
 import { Customer } from '../models';
 import { UpdateCustomerService } from '../services';
@@ -36,7 +38,10 @@ import { UpdateCustomerService } from '../services';
 @ApiTags('customers')
 @Controller()
 export class UpdateCustomerController {
-  constructor(private updateCustomerService: UpdateCustomerService) {}
+  constructor(
+    @Inject(UpdateCustomerService)
+    private updateCustomerService: IUpdateCustomerService,
+  ) {}
 
   @ApiOperation({ summary: 'Update Customer data' })
   @ApiCreatedResponse({
@@ -69,7 +74,7 @@ export class UpdateCustomerController {
   execute(
     @Param('id', new ParseUUIDPipe({ version: '4' })) customerId: string,
     @Body() customerDto: CustomerDto,
-  ): ReturnType<UpdateCustomerService['execute']> {
+  ): ReturnType<IUpdateCustomerService['execute']> {
     return this.updateCustomerService.execute(customerId, customerDto);
   }
 }
