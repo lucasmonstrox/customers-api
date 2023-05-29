@@ -51,7 +51,7 @@ Observartion: You must change `$APP_PORT` for the port to be used in your enviro
 # unit tests
 yarn test
 
-# unit tests with coverage(folder coverage will be generated in root folder)
+# unit tests with coverage
 yarn test:cov
 
 # e2e tests
