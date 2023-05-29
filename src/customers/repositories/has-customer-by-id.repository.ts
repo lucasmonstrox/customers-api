@@ -1,11 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CacheRepository } from '@/core/repositories';
-import { HasCustomerByIdRepository as IHasCustomerByIdRepository } from '../domain';
+import {
+  CacheRepository as ICacheRepository,
+  HasCustomerByIdRepository as IHasCustomerByIdRepository,
+} from '../domain';
 import { Customer } from '../models';
 
 @Injectable()
 export class HasCustomerByIdRepository implements IHasCustomerByIdRepository {
-  constructor(private cacheRepository: CacheRepository) {}
+  constructor(
+    @Inject(CacheRepository)
+    private cacheRepository: ICacheRepository,
+  ) {}
 
   async execute(
     customerId: string,

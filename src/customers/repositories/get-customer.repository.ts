@@ -1,11 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CacheRepository } from '@/core/repositories';
-import { GetCustomerRepository as IGetCustomerRepository } from '../domain';
+import {
+  CacheRepository as ICacheRepository,
+  GetCustomerRepository as IGetCustomerRepository,
+} from '../domain';
 import { Customer } from '../models';
 
 @Injectable()
 export class GetCustomerRepository implements IGetCustomerRepository {
-  constructor(private cacheRepository: CacheRepository) {}
+  constructor(
+    @Inject(CacheRepository)
+    private cacheRepository: ICacheRepository,
+  ) {}
 
   async execute(
     customerId: string,
