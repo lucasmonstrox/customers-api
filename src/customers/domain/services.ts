@@ -1,7 +1,7 @@
 import { Customer } from './models';
 
-type CustomerDto = Pick<Customer, 'id' | 'name' | 'document'>;
-type CreateCustomerDto = Pick<CustomerDto, 'name' | 'document'>;
+export type CustomerDto = Pick<Customer, 'id' | 'name' | 'document'>;
+export type CreateCustomerDto = Pick<CustomerDto, 'name' | 'document'>;
 
 export interface CreateCustomerService {
   execute(dto: CreateCustomerDto): Promise<Customer>;

@@ -4,6 +4,7 @@ import {
   GetCustomerRepository as IGetCustomerRepository,
   HasCustomerByIdRepository as IHasCustomerByIdRepository,
   SaveCustomerRepository as ISaveCustomerRepository,
+  UpdateCustomerService as IUpdateCustomerService,
 } from '../domain';
 import { CustomerDto } from '../dto';
 import {
@@ -19,7 +20,7 @@ import {
 } from '../repositories';
 
 @Injectable()
-export class UpdateCustomerService {
+export class UpdateCustomerService implements IUpdateCustomerService {
   constructor(
     @Inject(DeleteCustomerRepository)
     private deleteCustomerRepository: IDeleteCustomerRepository,
@@ -34,7 +35,7 @@ export class UpdateCustomerService {
   async execute(
     customerId: string,
     customerDto: CustomerDto,
-  ): Promise<Customer> {
+  ): ReturnType<IUpdateCustomerService['execute']> {
     const customer = await this.getCustomerRepository.execute(customerId);
     const customerNotFound = !customer;
     if (customerNotFound) {
