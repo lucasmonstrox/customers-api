@@ -6,6 +6,7 @@ import {
 } from '../exceptions';
 import { Customer } from '../models';
 import {
+  DeleteCustomerRepository,
   GetCustomerRepository,
   HasCustomerByIdRepository,
   SaveCustomerRepository,
@@ -14,6 +15,7 @@ import {
 @Injectable()
 export class UpdateCustomerService {
   constructor(
+    private deleteCustomerRepository: DeleteCustomerRepository,
     private getCustomerRepository: GetCustomerRepository,
     private hasCustomerByIdRepository: HasCustomerByIdRepository,
     private saveCustomerRepository: SaveCustomerRepository,
@@ -42,6 +44,9 @@ export class UpdateCustomerService {
       customerDto,
     );
     await this.saveCustomerRepository.execute(updatedCustomer);
+    if (updatingCustomerIdIsDifferentFromCustomerId) {
+      await this.deleteCustomerRepository.execute(customerId);
+    }
     return updatedCustomer;
   }
 }

@@ -3,14 +3,11 @@ import { CacheRepository } from '@/core/repositories';
 import { Customer } from '../models';
 
 @Injectable()
-export class HasCustomerByIdRepository {
+export class DeleteCustomerRepository {
   constructor(private cacheRepository: CacheRepository) {}
 
-  async execute(customerId: string): Promise<boolean> {
+  async execute(customerId: string) {
     const customerCacheKey = Customer.getCacheKey(customerId);
-    const hasCustomerById = await this.cacheRepository.keyExists(
-      customerCacheKey,
-    );
-    return hasCustomerById;
+    await this.cacheRepository.delete(customerCacheKey);
   }
 }

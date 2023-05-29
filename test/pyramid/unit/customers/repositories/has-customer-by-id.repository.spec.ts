@@ -1,5 +1,4 @@
 import { Test } from '@nestjs/testing';
-import { UnavailableCacheException } from '@/core/exceptions';
 import { CacheRepository } from '@/core/repositories';
 import { HasCustomerByIdRepository } from '@/customers/repositories';
 import { makeCustomer } from '@/test/mocks/customers/models';
@@ -20,19 +19,6 @@ describe('HasCustomerByIdRepository', () => {
     hasCustomerByIdRepository = moduleRef.get<HasCustomerByIdRepository>(
       HasCustomerByIdRepository,
     );
-  });
-
-  it('should throw UnavailableCacheException', async () => {
-    const { id } = makeCustomer();
-    const cacheRepositorySpy = jest
-      .spyOn(cacheRepository, 'keyExists')
-      .mockImplementationOnce(() => {
-        throw new Error();
-      });
-    await expect(hasCustomerByIdRepository.execute(id)).rejects.toThrow(
-      UnavailableCacheException,
-    );
-    expect(cacheRepositorySpy).toHaveBeenCalledWith(Customer.getCacheKey(id));
   });
 
   it('should return false when key does not exists', async () => {

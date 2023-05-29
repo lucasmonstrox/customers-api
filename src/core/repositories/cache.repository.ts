@@ -9,6 +9,14 @@ export class CacheRepository {
     private redis: Redis,
   ) {}
 
+  async delete(key: string) {
+    try {
+      await this.redis.del(key);
+    } catch (e) {
+      throw new UnavailableCacheException();
+    }
+  }
+
   async get<T>(key: string): Promise<T> {
     try {
       const data = await this.redis.get(key);
