@@ -87,14 +87,14 @@ yarn start:prod
 
 # ✅ TODO
 
-[ ] Add docker
-[ ] Add integration tests to redis
-[ ] Add redis transactions
-[ ] Standardize error messages
-[ ] Lock nodejs version
-[ ] Add SUT to avoid some redundant stuffs in tests
-[ ] Add pt-BR README
-[ ] Add application logs
-[ ] Add stress tests
-[ ] Add husky pre-push
+[ ] Add docker  
+[ ] Add integration tests to redis  
+[ ] Add redis transactions  
+[ ] Standardize error messages  
+[ ] Lock nodejs version  
+[ ] Add SUT to avoid some redundant stuffs in tests  
+[ ] Add pt-BR README  
+[ ] Add application logs  
+[ ] Add stress tests  
+[ ] Add husky pre-push  
 [ ] Disable swagger on production
