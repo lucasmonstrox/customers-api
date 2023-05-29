@@ -38,13 +38,11 @@ docker-compose up -d
 yarn start:dev
 ```
 
-Observation: You must change `$APP_PORT` for the port to be used in your environment.
+Observation: Api will run on the port set in `$APP_PORT` in `.env`.
 
 ## 🎮 Playground
 
 `http://localhost:$APP_PORT/swagger` to access swagger playground.
-
-Observation: You must change `$APP_PORT` for the port to be used in your environment.
 
 ## 🧪 Running tests
 
