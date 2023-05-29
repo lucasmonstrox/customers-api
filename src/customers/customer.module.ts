@@ -5,6 +5,7 @@ import {
   UpdateCustomerController,
 } from './controllers';
 import {
+  DeleteCustomerRepository,
   GetCustomerRepository,
   HasCustomerByIdRepository,
   SaveCustomerRepository,
@@ -23,6 +24,7 @@ import {
   ],
   providers: [
     CreateCustomerService,
+    DeleteCustomerRepository,
     HasCustomerByIdRepository,
     GetCustomerRepository,
     GetCustomerService,
