@@ -6,18 +6,18 @@ describe('makeBadRequestErrors', () => {
     const validationErrors: ValidationError[] = [
       {
         property: 'name',
-        constraints: { isNotEmpty: 'name is not empty' },
+        constraints: { isNotEmpty: 'name should not be empty' },
       },
       {
         property: 'document',
-        constraints: { isNotEmpty: 'document is not empty' },
+        constraints: { isNotEmpty: 'document should not be empty' },
       },
     ];
     const result = makeBadRequestErrors(validationErrors);
     expect(result).toStrictEqual({
       errors: {
-        name: { isNotEmpty: 'name is not empty' },
-        document: { isNotEmpty: 'document is not empty' },
+        name: { isNotEmpty: 'name should not be empty' },
+        document: { isNotEmpty: 'document should not be empty' },
       },
     });
   });
