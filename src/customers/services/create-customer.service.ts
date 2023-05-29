@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CustomerDto } from '../dto';
+import { CreateCustomerDto } from '../dto';
 import { Customer } from '../models';
 import { SaveCustomerRepository } from '../repositories';
 
@@ -7,7 +7,7 @@ import { SaveCustomerRepository } from '../repositories';
 export class CreateCustomerService {
   constructor(private saveCustomerRepository: SaveCustomerRepository) {}
 
-  async execute({ name, document }: CustomerDto): Promise<Customer> {
+  async execute({ name, document }: CreateCustomerDto): Promise<Customer> {
     const customer = new Customer(name, document);
     await this.saveCustomerRepository.execute(customer);
     return customer;

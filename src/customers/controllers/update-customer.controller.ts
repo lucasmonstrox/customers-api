@@ -1,7 +1,15 @@
-import { Body, Controller, Param, Put, Version } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Param,
+  ParseUUIDPipe,
+  Put,
+  Version,
+} from '@nestjs/common';
 import {
   ApiBadGatewayResponse,
   ApiBadRequestResponse,
+  ApiConflictResponse,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOperation,
@@ -16,6 +24,7 @@ import {
 import {
   BAD_GATEWAY,
   BAD_REQUEST,
+  CUSTOMER_CONFLICT,
   CUSTOMER_NOT_FOUND,
   GET_CUSTOMER,
   NOT_AUTHENTICATED,
@@ -46,6 +55,10 @@ export class UpdateCustomerController {
     type: ErrorResponse,
     description: CUSTOMER_NOT_FOUND,
   })
+  @ApiConflictResponse({
+    type: ErrorResponse,
+    description: CUSTOMER_CONFLICT,
+  })
   @ApiBadGatewayResponse({
     type: ErrorResponse,
     description: BAD_GATEWAY,
@@ -54,7 +67,7 @@ export class UpdateCustomerController {
   @Roles({ roles: ['user'] })
   @Put(':id')
   execute(
-    @Param('id') customerId: string,
+    @Param('id', new ParseUUIDPipe({ version: '4' })) customerId: string,
     @Body() customerDto: CustomerDto,
   ): ReturnType<UpdateCustomerService['execute']> {
     return this.updateCustomerService.execute(customerId, customerDto);

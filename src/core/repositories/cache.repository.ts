@@ -1,17 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { UnavailableCacheException } from '../exceptions';
-import { Cache } from '../types';
+import { Redis } from 'ioredis';
 
 @Injectable()
 export class CacheRepository {
   constructor(
     @Inject('CACHE')
-    private cache: Cache,
+    private redis: Redis,
   ) {}
 
   async get<T>(key: string): Promise<T> {
     try {
-      const data = await this.cache.get(key);
+      const data = await this.redis.get(key);
       const dataNotFound = !data;
       if (dataNotFound) {
         return null;
@@ -23,9 +23,18 @@ export class CacheRepository {
     }
   }
 
+  async keyExists(key: string): Promise<boolean> {
+    try {
+      const keyExists = (await this.redis.exists(key)) > 0;
+      return keyExists;
+    } catch (e) {
+      throw new UnavailableCacheException();
+    }
+  }
+
   async set(key: string, data: any) {
     try {
-      await this.cache.set(key, JSON.stringify(data));
+      await this.redis.set(key, JSON.stringify(data));
     } catch (e) {
       throw new UnavailableCacheException();
     }

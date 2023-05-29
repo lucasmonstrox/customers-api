@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { CacheRepository } from '@/cache/repositories';
+import { CacheRepository } from '@/core/repositories';
 import { SaveCustomerRepository } from '@/customers/repositories';
 import { makeCustomer } from '@/test/mocks/customers/models';
 

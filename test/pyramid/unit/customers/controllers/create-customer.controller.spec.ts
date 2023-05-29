@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { CreateCustomerController } from '@/customers/controllers';
 import { CreateCustomerService } from '@/customers/services';
-import { makeCustomerDto } from '@/test/mocks/customers/dto';
+import { makeCreateCustomerDto } from '@/test/mocks/customers/dto';
 import { makeCustomer } from '@/test/mocks/customers/models';
 
 describe('CreateCustomerController', () => {
@@ -26,12 +26,16 @@ describe('CreateCustomerController', () => {
 
   it('should return customer', async () => {
     const mockedCustomer = makeCustomer();
-    const CreateCustomerServiceSpy = jest
+    const createCustomerServiceSpy = jest
       .spyOn(createCustomerService, 'execute')
       .mockResolvedValueOnce(mockedCustomer);
-    const mockedCustomerDto = makeCustomerDto();
-    const result = await createCustomerController.execute(mockedCustomerDto);
+    const mockedCreateCustomerDto = makeCreateCustomerDto();
+    const result = await createCustomerController.execute(
+      mockedCreateCustomerDto,
+    );
     expect(mockedCustomer).toStrictEqual(result);
-    expect(CreateCustomerServiceSpy).toHaveBeenCalledWith(mockedCustomerDto);
+    expect(createCustomerServiceSpy).toHaveBeenCalledWith(
+      mockedCreateCustomerDto,
+    );
   });
 });

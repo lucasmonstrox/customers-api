@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Test } from '@nestjs/testing';
-import { UnavailableCacheException } from '@/cache/exceptions';
-import { CacheRepository } from '@/cache/repositories';
+import { UnavailableCacheException } from '@/core/exceptions';
+import { CacheRepository } from '@/core/repositories';
 import { GetCustomerRepository } from '@/customers/repositories';
 import { makeCustomer } from '@/test/mocks/customers/models';
 

@@ -25,14 +25,14 @@ import {
   GET_CUSTOMER,
   NOT_AUTHENTICATED,
 } from '../consts/swagger';
-import { CustomerDto } from '../dto';
+import { CreateCustomerDto } from '../dto';
 import { Customer } from '../models';
 import { CreateCustomerService } from '../services';
 
 @ApiTags('customers')
 @Controller()
 export class CreateCustomerController {
-  constructor(private CreateCustomerService: CreateCustomerService) {}
+  constructor(private createCustomerService: CreateCustomerService) {}
 
   @ApiOperation({ summary: 'Create new Customer' })
   @ApiCreatedResponse({
@@ -56,8 +56,8 @@ export class CreateCustomerController {
   @Roles({ roles: ['user'] })
   @Post()
   async execute(
-    @Body() customerDto: CustomerDto,
+    @Body() createCustomerDto: CreateCustomerDto,
   ): ReturnType<CreateCustomerService['execute']> {
-    return this.CreateCustomerService.execute(customerDto);
+    return this.createCustomerService.execute(createCustomerDto);
   }
 }

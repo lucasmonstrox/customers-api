@@ -1,4 +1,5 @@
 export const GET_CUSTOMER = 'Returns the Customer data';
+export const CUSTOMER_CONFLICT = 'Occurs when CustomerId already exists';
 export const CUSTOMER_NOT_FOUND = 'Occurs when a Customer is not found';
 export const NOT_AUTHENTICATED = 'Occurs when the User is not authenticated';
 export const BAD_REQUEST =

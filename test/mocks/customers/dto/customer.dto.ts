@@ -1,8 +1,9 @@
 import { faker } from '@faker-js/faker';
 import { CustomerDto } from '@/customers/dto';
+import { makeCreateCustomerDto } from './create-customer.dto';
 
 export const makeCustomerDto = (data?: Partial<CustomerDto>): CustomerDto => ({
-  name: faker.person.fullName(),
-  document: faker.string.uuid(),
+  id: faker.string.uuid(),
+  ...makeCreateCustomerDto(),
   ...data,
 });

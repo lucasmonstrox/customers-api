@@ -4,7 +4,11 @@ import {
   GetCustomerController,
   UpdateCustomerController,
 } from './controllers';
-import { GetCustomerRepository, SaveCustomerRepository } from './repositories';
+import {
+  GetCustomerRepository,
+  HasCustomerByIdRepository,
+  SaveCustomerRepository,
+} from './repositories';
 import {
   CreateCustomerService,
   GetCustomerService,
@@ -19,6 +23,7 @@ import {
   ],
   providers: [
     CreateCustomerService,
+    HasCustomerByIdRepository,
     GetCustomerRepository,
     GetCustomerService,
     SaveCustomerRepository,
