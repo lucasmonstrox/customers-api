@@ -85,6 +85,7 @@ yarn start:prod
 # ✅ TODO
 
 [ ] Add docker
+[ ] Add integration tests to redis
 [ ] Standardize error messages
 [ ] Lock nodejs version
 [ ] Add pt-BR README
