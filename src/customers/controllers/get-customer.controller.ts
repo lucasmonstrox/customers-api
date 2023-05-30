@@ -1,6 +1,7 @@
 import { Controller, Get, Inject, Param, Version } from '@nestjs/common';
 import {
   ApiBadGatewayResponse,
+  ApiBearerAuth,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
@@ -27,6 +28,7 @@ export class GetCustomerController {
     private getCustomerService: IGetCustomerService,
   ) {}
 
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Get Customer data' })
   @ApiOkResponse({
     type: Customer,

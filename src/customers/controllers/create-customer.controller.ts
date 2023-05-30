@@ -10,6 +10,7 @@ import {
 import {
   ApiBadGatewayResponse,
   ApiBadRequestResponse,
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiOperation,
   ApiTags,
@@ -39,6 +40,7 @@ export class CreateCustomerController {
     private createCustomerService: ICreateCustomerService,
   ) {}
 
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Create new Customer' })
   @ApiCreatedResponse({
     type: Customer,

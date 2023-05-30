@@ -10,6 +10,7 @@ import {
 import {
   ApiBadGatewayResponse,
   ApiBadRequestResponse,
+  ApiBearerAuth,
   ApiConflictResponse,
   ApiCreatedResponse,
   ApiNotFoundResponse,
@@ -43,6 +44,7 @@ export class UpdateCustomerController {
     private updateCustomerService: IUpdateCustomerService,
   ) {}
 
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Update Customer data' })
   @ApiCreatedResponse({
     type: Customer,
