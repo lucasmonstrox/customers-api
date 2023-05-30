@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Redis } from 'ioredis';
 import { UnavailableCacheException } from '../exceptions';
 
+// TODO: avoid god class
 @Injectable()
 export class CacheRepository {
   constructor(
