@@ -8,7 +8,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { Roles } from 'nest-keycloak-connect';
+// import { Roles } from 'nest-keycloak-connect';
 import { ErrorResponse } from '@/core/schemas/swagger/responses';
 import {
   BAD_GATEWAY,
@@ -47,7 +47,7 @@ export class GetCustomerController {
     description: BAD_GATEWAY,
   })
   @Version('1')
-  @Roles({ roles: ['user'] })
+  // @Roles({ roles: ['user'] })
   @Get(':id')
   async execute(
     @Param('id') customerId: string,

@@ -80,8 +80,10 @@ make compose
 
 # ✅ TODO
 
+[ ] Add CI
 [ ] Improve docker for production
 [ ] Add integration tests to redis  
+[ ] Add integration tests to keycloak  
 [ ] Add redis transactions  
 [ ] Standardize error messages  
 [ ] Add SUT to avoid some redundant stuffs in tests  

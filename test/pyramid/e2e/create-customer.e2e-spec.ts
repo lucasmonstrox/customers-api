@@ -1,31 +1,57 @@
-import { Test } from '@nestjs/testing';
+import { HttpService } from '@nestjs/axios';
 import { HttpStatus, INestApplication } from '@nestjs/common';
+import { FastifyAdapter } from '@nestjs/platform-fastify';
+import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
-import { UnavailableCacheException } from '@/cache/exceptions';
-import { CacheRepository } from '@/cache/repositories';
-import { BadRequestErrors } from '@/core/types';
 import { AppModule } from '@/app.module';
 import { configure } from '@/configure';
+import { UnavailableCacheException } from '@/core/exceptions';
+import { CacheRepository } from '@/core/repositories';
+import { BadRequestErrors } from '@/core/types';
 import { makeCustomerDto } from '@/test/mocks/customers/dto';
 
-// TODO: test unauthenticated requests
-// TODO: test unavailable sso
-describe('SaveCustomer', () => {
+describe('CreateCustomer', () => {
   let app: INestApplication;
   let cacheRepository: CacheRepository;
+  let toPromise;
 
   beforeAll(async () => {
+    toPromise = jest
+      .fn()
+      .mockImplementation(() => ({ data: { active: true } }));
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
-    app = moduleRef.createNestApplication();
+    })
+      .overrideProvider(HttpService)
+      .useValue({ post: jest.fn().mockImplementation(() => ({ toPromise })) })
+      .compile();
+    app = moduleRef.createNestApplication(new FastifyAdapter());
     configure(app);
     await app.init();
+    await app.getHttpAdapter().getInstance().ready();
     cacheRepository = moduleRef.get<CacheRepository>(CacheRepository);
   });
 
   afterAll(async () => {
     await app.close();
+  });
+
+  it('should return UNAUTHORIZED(401) when Authorization Bearer is missing', async () => {
+    const payload = makeCustomerDto();
+    const { statusCode } = await request(app.getHttpServer())
+      .post('/customers')
+      .send(payload);
+    expect(statusCode).toBe(HttpStatus.UNAUTHORIZED);
+  });
+
+  it('should return UNAUTHORIZED(401) when User is not authenticated', async () => {
+    toPromise.mockImplementationOnce(() => ({ data: { active: false } }));
+    const payload = makeCustomerDto();
+    const { statusCode } = await request(app.getHttpServer())
+      .post('/customers')
+      .set('Authorization', 'Bearer mockedToken')
+      .send(payload);
+    expect(statusCode).toBe(HttpStatus.UNAUTHORIZED);
   });
 
   it('should return BAD_GATEWAY(502) when cache is unavailable', async () => {
@@ -35,6 +61,7 @@ describe('SaveCustomer', () => {
     const payload = makeCustomerDto();
     const { body, statusCode } = await request(app.getHttpServer())
       .post('/customers')
+      .set('Authorization', 'Bearer mockedToken')
       .send(payload);
     expect(statusCode).toBe(HttpStatus.BAD_GATEWAY);
     expect(body.message).toBe(UnavailableCacheException.message);
@@ -44,14 +71,15 @@ describe('SaveCustomer', () => {
     const payload = makeCustomerDto({ name: '', document: '' });
     const { body } = await request(app.getHttpServer())
       .post('/customers')
+      .set('Authorization', 'Bearer mockedToken')
       .send(payload);
     const badRequestErrors: BadRequestErrors = {
       errors: {
-        name: {
-          isNotEmpty: 'name should not be empty',
-        },
         document: {
           isNotEmpty: 'document should not be empty',
+        },
+        name: {
+          isNotEmpty: 'name should not be empty',
         },
       },
     };
@@ -62,6 +90,7 @@ describe('SaveCustomer', () => {
     const payload = makeCustomerDto();
     const { body, statusCode } = await request(app.getHttpServer())
       .post('/customers')
+      .set('Authorization', 'Bearer mockedToken')
       .send(payload);
     expect(statusCode).toBe(HttpStatus.CREATED);
     expect(body).toHaveProperty('id');
