@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  redis:
+    container_name: redis
+    image: redis:7.0.11
+    restart: always
+    ports:
+      - ${REDIS_PORT}
+    volumes:
+      - redis_volume:/var/lib/redis
+volumes:
+  redis_volume:

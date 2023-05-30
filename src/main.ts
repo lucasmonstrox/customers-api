@@ -26,6 +26,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
-  await app.listen(configService.get('APP_PORT'));
+  // TODO: to make docker working, the host '0.0.0.0' was need below
+  await app.listen(configService.get('APP_PORT'), '0.0.0.0');
 }
 bootstrap();

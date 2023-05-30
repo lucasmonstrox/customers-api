@@ -26,7 +26,7 @@ Whenever a new environment variable is added, it must be also added to the `.exa
 - This is will make a new redis-commander running in port `8081`.
 
 ```bash
-docker-compose up -d
+make compose-local
 ```
 
 # ⌨ Development
@@ -75,22 +75,15 @@ Before building application to production, make sure environment variables are a
 Building for production
 
 ```bash
-yarn build
-```
-
-Running on production
-
-```bash
-yarn start:prod
+make compose
 ```
 
 # ✅ TODO
 
-[ ] Add docker  
+[ ] Improve docker for production
 [ ] Add integration tests to redis  
 [ ] Add redis transactions  
 [ ] Standardize error messages  
-[ ] Lock nodejs version  
 [ ] Add SUT to avoid some redundant stuffs in tests  
 [ ] Add pt-BR README  
 [ ] Add application logs  

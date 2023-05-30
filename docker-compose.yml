@@ -5,30 +5,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: customers-api
     restart: always
+    expose:
+      - ${APP_PORT}
     env_file:
       - .env
-    links:
-      - redis
+    environment:
+      - REDIS_HOST=redis
     ports:
       - ${APP_PORT}:${APP_PORT}
-    depends_on:
-      - redis
-  redis:
-    container_name: redis
-    image: redis:7.0.11
-    restart: always
-    ports:
-      - ${REDIS_PORT}
-    volumes:
-      - redis_volume:/var/lib/redis
-  redis-commander:
-    image: rediscommander/redis-commander:latest
-    environment:
-      - REDIS_HOSTS=local:${REDIS_HOST}:${REDIS_PORT}
-    ports:
-      - 8081:8081
     depends_on:
       - redis
 volumes:
