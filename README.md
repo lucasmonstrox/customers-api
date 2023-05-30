@@ -80,8 +80,8 @@ make compose
 
 # ✅ TODO
 
-[ ] Add CI
-[ ] Improve docker for production
+[ ] Add CI  
+[ ] Improve docker for production  
 [ ] Add integration tests to redis  
 [ ] Add integration tests to keycloak  
 [ ] Add redis transactions  
