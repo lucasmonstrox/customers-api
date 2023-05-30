@@ -8,7 +8,6 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-// import { Roles } from 'nest-keycloak-connect';
 import { ErrorResponse } from '@/core/schemas/swagger/responses';
 import {
   BAD_GATEWAY,

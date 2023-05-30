@@ -16,7 +16,6 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-// import { Roles } from 'nest-keycloak-connect';
 import {
   BadRequestResponse,
   ErrorResponse,
@@ -60,7 +59,6 @@ export class CreateCustomerController {
   })
   @Version('1')
   @HttpCode(HttpStatus.CREATED)
-  // @Roles({ roles: ['user'] })
   @Post()
   async execute(
     @Body() createCustomerDto: CreateCustomerDto,

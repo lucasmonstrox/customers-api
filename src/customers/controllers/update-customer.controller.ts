@@ -18,7 +18,6 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-// import { Roles } from 'nest-keycloak-connect';
 import {
   BadRequestResponse,
   ErrorResponse,
@@ -71,7 +70,6 @@ export class UpdateCustomerController {
     description: BAD_GATEWAY,
   })
   @Version('1')
-  // @Roles({ roles: ['user'] })
   @Put(':id')
   execute(
     @Param('id', new ParseUUIDPipe({ version: '4' })) customerId: string,
